@@ -7,13 +7,46 @@ const palabras = site.titularHero.split(' ');
 ---
 
 <section id="inicio" class="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-tinta text-papel">
+  <!--
+    Fondo del hero. DEMO: imagen de atardecer + animación (zoom, brasas, resplandor).
+    CLIENTE REAL: sustituye el <img> por una foto del local o, si quieres vídeo,
+    descomenta el <video> y pon su .mp4/.webm en /public/assets (ver CAMBIAR_DATOS_CLIENTE.md).
+  -->
+  <!--
+  <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline
+    poster={asset('/assets/hero-restaurante.svg')}>
+    <source src={asset('/assets/hero.webm')} type="video/webm" />
+    <source src={asset('/assets/hero.mp4')} type="video/mp4" />
+  </video>
+  -->
   <img
     src={asset('/assets/hero-restaurante.svg')}
-    alt="Mesa frente al puerto al anochecer en Sal Marina"
-    class="absolute inset-0 h-full w-full object-cover"
+    alt="Terraza frente al mar al atardecer en Sal Marina"
+    class="kenburns absolute inset-0 h-full w-full object-cover"
     fetchpriority="high"
   />
-  <div class="absolute inset-0 bg-gradient-to-t from-tinta via-tinta/30 to-tinta/55"></div>
+
+  <!-- Brasas que suben (movimiento, sin vídeo) -->
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <span class="ember" style="left:14%;--dx:18px;--dur:7.5s;--dly:0s"></span>
+    <span class="ember" style="left:24%;--dx:-14px;--dur:9s;--dly:1.6s"></span>
+    <span class="ember" style="left:38%;--dx:22px;--dur:8s;--dly:3.1s"></span>
+    <span class="ember" style="left:52%;--dx:-10px;--dur:10s;--dly:0.8s"></span>
+    <span class="ember" style="left:63%;--dx:16px;--dur:7s;--dly:2.4s"></span>
+    <span class="ember" style="left:74%;--dx:-20px;--dur:9.5s;--dly:4s"></span>
+    <span class="ember" style="left:85%;--dx:12px;--dur:8.5s;--dly:1.2s"></span>
+    <span class="ember" style="left:46%;--dx:-16px;--dur:11s;--dly:5.2s"></span>
+  </div>
+
+  <!-- Resplandor de brasa que palpita en la base -->
+  <div
+    class="hero-glow pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
+    style="background:radial-gradient(120% 100% at 50% 100%, rgba(216,82,27,0.45), rgba(189,68,34,0.12) 45%, transparent 70%)"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="absolute inset-0 bg-gradient-to-t from-tinta via-tinta/25 to-tinta/55"></div>
 
   <!-- Columna: masthead arriba, titular abajo (sin solaparse nunca) -->
   <div class="container-x relative z-10 flex flex-1 flex-col">

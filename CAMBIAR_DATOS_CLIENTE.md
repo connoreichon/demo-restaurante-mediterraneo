@@ -51,10 +51,17 @@ Para cambiar las tipografías: edita `--font-display`, `--font-body` y `--font-h
 ## 3. Imágenes → `public/assets/`
 Sustituye los SVG de placeholder por **fotos reales**, idealmente con el **mismo
 nombre de archivo** (así no tocas el código). Si cambias la extensión (a `.jpg`/`.webp`),
-actualiza las rutas en `src/data/site.ts` y, para el hero, en `src/components/Hero.astro`.
+actualiza las rutas en `src/data/site.ts` y, para el hero, en `src/components/Portada.astro`.
+
+**Hero (portada):** la demo usa una escena de atardecer animada (zoom + brasas + resplandor,
+todo por CSS, sin derechos). Para el cliente:
+- **Foto:** reemplaza `hero-restaurante.svg` por una foto horizontal potente (terraza, mar,
+  plato a la brasa). Las animaciones de brasas/zoom siguen funcionando encima.
+- **Vídeo:** en `src/components/Portada.astro` hay un bloque `<video>` comentado. Descoméntalo,
+  pon el `hero.mp4`/`hero.webm` del cliente en `public/assets/` y deja la imagen como `poster`.
 
 Archivos a sustituir:
-- `hero-restaurante.svg` → foto horizontal potente del local/plato estrella.
+- `hero-restaurante.svg` → foto horizontal potente del local/plato estrella (o vídeo, ver arriba).
 - `sobre-nosotros.svg` → foto vertical (cocina, equipo, dueño).
 - `plato-*.svg` → fotos cuadradas de cada especialidad.
 - `galeria-01..06.svg` → fotos del ambiente, terraza, producto, equipo.

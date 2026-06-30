@@ -89,30 +89,66 @@ function logoSvg() {
 </svg>`;
 }
 
+// Hero: atardecer en la terraza frente al mar (escena figurativa, sin derechos).
+function heroSunset({ w, h, id }) {
+  const horizon = Math.round(h * 0.5);
+  const olas = [0.06, 0.13, 0.22, 0.33, 0.46, 0.62]
+    .map(
+      (f) =>
+        `<rect x="0" y="${Math.round(horizon + (h - horizon) * f)}" width="${w}" height="${Math.max(1, Math.round(h * 0.004))}" fill="#ffe6c0" opacity="${(0.14 - f * 0.16).toFixed(3)}"/>`
+    )
+    .join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Terraza frente al mar al atardecer">
+  <defs>
+    <linearGradient id="sky-${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14100c"/>
+      <stop offset="0.42" stop-color="#3a2316"/>
+      <stop offset="0.72" stop-color="#b9542a"/>
+      <stop offset="0.92" stop-color="#e89a4e"/>
+      <stop offset="1" stop-color="#f3c074"/>
+    </linearGradient>
+    <linearGradient id="sea-${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d98a48"/>
+      <stop offset="0.12" stop-color="#9a5a38"/>
+      <stop offset="0.55" stop-color="#36251f"/>
+      <stop offset="1" stop-color="#0e0a08"/>
+    </linearGradient>
+    <radialGradient id="sun-${id}" cx="0.66" cy="1" r="0.62">
+      <stop offset="0" stop-color="#ffe7b0" stop-opacity="0.9"/>
+      <stop offset="0.4" stop-color="#ffb060" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffb060" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vgn-${id}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0705" stop-opacity="0.35"/>
+      <stop offset="0.4" stop-color="#0a0705" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a0705" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="soft-${id}"><feGaussianBlur stdDeviation="${Math.round(w * 0.012)}"/></filter>
+    <filter id="grain-${id}">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="${w}" height="${horizon}" fill="url(#sky-${id})"/>
+  <ellipse cx="${w * 0.66}" cy="${horizon}" rx="${w * 0.5}" ry="${Math.round(h * 0.34)}" fill="url(#sun-${id})"/>
+  <circle cx="${w * 0.66}" cy="${Math.round(horizon - h * 0.025)}" r="${Math.round(h * 0.07)}" fill="#ffdf95" opacity="0.92" filter="url(#soft-${id})"/>
+  <rect y="${horizon}" width="${w}" height="${h - horizon}" fill="url(#sea-${id})"/>
+  <rect x="${Math.round(w * 0.58)}" y="${horizon}" width="${Math.round(w * 0.16)}" height="${h - horizon}" fill="#ffcf8a" opacity="0.15" filter="url(#soft-${id})"/>
+  ${olas}
+  <rect width="${w}" height="${h}" fill="url(#vgn-${id})"/>
+  <rect width="${w}" height="${h}" filter="url(#grain-${id})" opacity="0.5"/>
+</svg>`;
+}
+
 const INK = '#14110d';
 const files = {
   'logo.svg': logoSvg(),
 
-  // Portada: mar/puerto al anochecer, luz cálida arriba-derecha, sombra abajo.
-  'hero-restaurante.svg': scene({
-    w: 1800, h: 1200, id: 'hero', base: '#241b12', base2: '#0e0b08',
-    lights: [
-      { x: 0.78, y: 0.22, r: 0.55, color: '#e08a3c', op: 0.5 },
-      { x: 0.9, y: 0.4, r: 0.35, color: '#c2a35f', op: 0.35 },
-      { x: 0.2, y: 0.85, r: 0.5, color: '#3a4a2e', op: 0.3 },
-      { x: 0.45, y: 0.6, r: 0.3, color: '#bd4422', op: 0.18 }
-    ],
-    vignette: 0.6
-  }),
-
-  'og-image.svg': scene({
-    w: 1200, h: 630, id: 'og', base: '#241b12', base2: '#0e0b08',
-    lights: [
-      { x: 0.75, y: 0.25, r: 0.6, color: '#e08a3c', op: 0.5 },
-      { x: 0.25, y: 0.8, r: 0.5, color: '#3a4a2e', op: 0.3 }
-    ],
-    vignette: 0.55
-  }),
+  // Portada: atardecer en la terraza frente al mar.
+  'hero-restaurante.svg': heroSunset({ w: 1800, h: 1200, id: 'hero' }),
+  'og-image.svg': heroSunset({ w: 1200, h: 630, id: 'og' }),
 
   // Narrativa "del puerto a la brasa": brasas, fuego desde abajo.
   'sobre-nosotros.svg': scene({

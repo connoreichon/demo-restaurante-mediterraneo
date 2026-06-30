@@ -1,26 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-label="Sal Marina">
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-label="Terraza frente al mar al atardecer">
   <defs>
-    <linearGradient id="base-hero" x1="0" y1="0" x2="0.4" y2="1">
-      <stop offset="0" stop-color="#241b12"/>
-      <stop offset="1" stop-color="#0e0b08"/>
+    <linearGradient id="sky-hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14100c"/>
+      <stop offset="0.42" stop-color="#3a2316"/>
+      <stop offset="0.72" stop-color="#b9542a"/>
+      <stop offset="0.92" stop-color="#e89a4e"/>
+      <stop offset="1" stop-color="#f3c074"/>
     </linearGradient>
-    <radialGradient id="vig-hero" cx="0.5" cy="0.42" r="0.75">
-      <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
-      <stop offset="1" stop-color="#000" stop-opacity="0.6"/>
+    <linearGradient id="sea-hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d98a48"/>
+      <stop offset="0.12" stop-color="#9a5a38"/>
+      <stop offset="0.55" stop-color="#36251f"/>
+      <stop offset="1" stop-color="#0e0a08"/>
+    </linearGradient>
+    <radialGradient id="sun-hero" cx="0.66" cy="1" r="0.62">
+      <stop offset="0" stop-color="#ffe7b0" stop-opacity="0.9"/>
+      <stop offset="0.4" stop-color="#ffb060" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffb060" stop-opacity="0"/>
     </radialGradient>
-    <filter id="blur-hero"><feGaussianBlur stdDeviation="108"/></filter>
+    <linearGradient id="vgn-hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0a0705" stop-opacity="0.35"/>
+      <stop offset="0.4" stop-color="#0a0705" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0a0705" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="soft-hero"><feGaussianBlur stdDeviation="22"/></filter>
     <filter id="grain-hero">
-      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/>
       <feColorMatrix type="saturate" values="0"/>
       <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
       <feComposite operator="over" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <rect width="1800" height="1200" fill="url(#base-hero)"/>
-  <circle cx="1404" cy="264" r="660" fill="#e08a3c" opacity="0.5" filter="url(#blur-hero)"/>
-  <circle cx="1620" cy="480" r="420" fill="#c2a35f" opacity="0.35" filter="url(#blur-hero)"/>
-  <circle cx="360" cy="1020" r="600" fill="#3a4a2e" opacity="0.3" filter="url(#blur-hero)"/>
-  <circle cx="810" cy="720" r="360" fill="#bd4422" opacity="0.18" filter="url(#blur-hero)"/>
-  <rect width="1800" height="1200" fill="url(#vig-hero)"/>
-  <rect width="1800" height="1200" filter="url(#grain-hero)" opacity="0.6"/>
+  <rect width="1800" height="600" fill="url(#sky-hero)"/>
+  <ellipse cx="1188" cy="600" rx="900" ry="408" fill="url(#sun-hero)"/>
+  <circle cx="1188" cy="570" r="84" fill="#ffdf95" opacity="0.92" filter="url(#soft-hero)"/>
+  <rect y="600" width="1800" height="600" fill="url(#sea-hero)"/>
+  <rect x="1044" y="600" width="288" height="600" fill="#ffcf8a" opacity="0.15" filter="url(#soft-hero)"/>
+  <rect x="0" y="636" width="1800" height="5" fill="#ffe6c0" opacity="0.130"/><rect x="0" y="678" width="1800" height="5" fill="#ffe6c0" opacity="0.119"/><rect x="0" y="732" width="1800" height="5" fill="#ffe6c0" opacity="0.105"/><rect x="0" y="798" width="1800" height="5" fill="#ffe6c0" opacity="0.087"/><rect x="0" y="876" width="1800" height="5" fill="#ffe6c0" opacity="0.066"/><rect x="0" y="972" width="1800" height="5" fill="#ffe6c0" opacity="0.041"/>
+  <rect width="1800" height="1200" fill="url(#vgn-hero)"/>
+  <rect width="1800" height="1200" filter="url(#grain-hero)" opacity="0.5"/>
 </svg>

@@ -13,7 +13,7 @@ const nav = [
 
 <header
   id="site-header"
-  class="fixed inset-x-0 top-0 z-50 text-papel transition-colors duration-500"
+  class="fixed inset-x-0 top-0 z-50 bg-gradient-to-b from-tinta/85 via-tinta/40 to-transparent pb-2 text-papel transition-colors duration-500"
   data-header
 >
   <div class="container-x flex items-center justify-between py-5">
@@ -108,13 +108,18 @@ const nav = [
   // Cambia a "tinta sobre papel" al salir de la portada
   const onScroll = () => {
     if (!header) return;
-    const solid = window.scrollY > window.innerHeight * 0.85;
+    const solid = window.scrollY > window.innerHeight * 0.82;
     header.classList.toggle('text-tinta', solid);
     header.classList.toggle('text-papel', !solid);
     header.classList.toggle('bg-papel/95', solid);
     header.classList.toggle('backdrop-blur', solid);
     header.classList.toggle('border-b', solid);
     header.classList.toggle('border-tinta/10', solid);
+    // El degradado de protección solo cuando el header está sobre el hero
+    header.classList.toggle('bg-gradient-to-b', !solid);
+    header.classList.toggle('from-tinta/85', !solid);
+    header.classList.toggle('via-tinta/40', !solid);
+    header.classList.toggle('to-transparent', !solid);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
