@@ -159,5 +159,12 @@ export const opiniones = [
   }
 ];
 
-// Cita destacada (pull-quote editorial, en vez de un grid de testimonios)
-export const citaDestacada = opiniones[0];
+// Cita destacada (pull-quote de la sección "Del puerto a la brasa").
+// Acorde al plato que se ve: pescado a la brasa.
+export const citaDestacada = {
+  texto:
+    'El pescado a la brasa estaba en su punto: jugoso por dentro y con ese sabor a leña. Se nota el producto fresco y la mano en la parrilla. Repetiremos seguro.',
+  autor: 'Marta Gil',
+  detalle: 'Cena en la terraza',
+  estrellas: 5
+};

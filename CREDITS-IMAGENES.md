@@ -8,7 +8,7 @@ Aun así, dejamos aquí el origen por transparencia. Detalle: https://www.pexels
 | Archivo (`public/assets/img/`) | Fuente |
 |---|---|
 | `hero-terraza-mar.jpg` | pexels.com/photo/10833363 |
-| `brasa-loop.mp4` (vídeo, sección "Del puerto a la brasa") | pexels.com/video/11571662 |
+| `brasa-loop.mp4` (vídeo, sección "Del puerto a la brasa") | pexels.com/video/19238373 |
 | `puerto-brasa-fuego.jpg` (poster del vídeo) | pexels.com/photo/16931503 |
 | `lonja-pescado-brasa.jpg` | pexels.com/photo/10911363 |
 | `galeria-1-terraza-puerto.jpg` | pexels.com/photo/16930554 |
