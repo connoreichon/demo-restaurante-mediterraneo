@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="260" height="70" viewBox="0 0 260 70" role="img" aria-label="Sal Marina">
-  <g font-family="Georgia, 'Times New Roman', serif">
-    <text x="0" y="34" font-size="30" font-style="italic" fill="#f4ece0">Sal Marina</text>
-    <line x1="2" y1="46" x2="198" y2="46" stroke="#c2a35f" stroke-width="1"/>
-    <text x="2" y="62" font-family="Arial, Helvetica, sans-serif" font-size="9.5" letter-spacing="5" fill="#f4ece0" fill-opacity="0.7">DESDE 1998 · PALMA</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" fill="none" role="img" aria-label="Sal Marina">
+  <circle cx="20" cy="20" r="18.3" stroke="#17130d" stroke-width="1.5"/>
+  <circle cx="20" cy="15" r="2.6" fill="#bd4422"/>
+  <path d="M9 23 q2.75 -2.6 5.5 0 t5.5 0 t5.5 0 t5.5 0" stroke="#17130d" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M9 27.4 q2.75 -2.6 5.5 0 t5.5 0 t5.5 0 t5.5 0" stroke="#17130d" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
 </svg>

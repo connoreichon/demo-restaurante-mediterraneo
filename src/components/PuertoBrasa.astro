@@ -11,21 +11,17 @@ import { asset } from '../lib/asset';
     class="absolute right-0 top-0 hidden h-full w-[42%] object-cover md:block"
     loading="lazy"
   />
-  <!-- Fuego en movimiento: resplandor que parpadea sobre las llamas reales -->
-  <div
-    class="fire-glow pointer-events-none absolute right-0 top-0 hidden h-[62%] w-[42%] md:block"
-    style="background:radial-gradient(80% 70% at 50% 32%, rgba(255,160,60,0.55), rgba(224,90,40,0.22) 45%, transparent 72%)"
+  <!-- Fuego REAL en movimiento: vídeo de llamas superpuesto (screen) sobre la foto -->
+  <video
+    class="pointer-events-none absolute right-0 top-0 hidden h-[64%] w-[42%] object-cover mix-blend-screen md:block"
+    autoplay
+    muted
+    loop
+    playsinline
     aria-hidden="true"
   >
-  </div>
-  <!-- Chispas que suben desde la brasa -->
-  <div class="pointer-events-none absolute right-0 top-0 hidden h-full w-[42%] overflow-hidden md:block" aria-hidden="true">
-    <span class="fire-ember" style="left:46%;bottom:34%;--dx:10px;--dur:3.4s;--dly:0s"></span>
-    <span class="fire-ember" style="left:55%;bottom:38%;--dx:-8px;--dur:4.2s;--dly:1.1s"></span>
-    <span class="fire-ember" style="left:62%;bottom:30%;--dx:12px;--dur:3.8s;--dly:2.2s"></span>
-    <span class="fire-ember" style="left:50%;bottom:42%;--dx:-12px;--dur:4.6s;--dly:0.6s"></span>
-    <span class="fire-ember" style="left:40%;bottom:36%;--dx:6px;--dur:3.2s;--dly:1.7s"></span>
-  </div>
+    <source src={asset('/assets/img/fuego-loop.mp4')} type="video/mp4" />
+  </video>
   <div class="absolute right-0 top-0 hidden h-full w-[42%] bg-gradient-to-r from-tinta via-transparent to-transparent md:block"></div>
 
   <div class="container-x relative">
@@ -64,7 +60,7 @@ import { asset } from '../lib/asset';
       </div>
     </div>
 
-    <!-- Imagen en móvil (con fuego en movimiento) -->
+    <!-- Imagen en móvil (con vídeo de fuego real superpuesto) -->
     <figure class="reveal relative mt-12 overflow-hidden md:hidden">
       <img
         src={asset('/assets/img/puerto-brasa-fuego.jpg')}
@@ -72,15 +68,16 @@ import { asset } from '../lib/asset';
         class="aspect-[4/3] w-full object-cover"
         loading="lazy"
       />
-      <div
-        class="fire-glow pointer-events-none absolute inset-x-0 top-0 h-[65%]"
-        style="background:radial-gradient(80% 75% at 50% 30%, rgba(255,160,60,0.55), rgba(224,90,40,0.22) 45%, transparent 72%)"
+      <video
+        class="pointer-events-none absolute inset-x-0 top-0 h-[68%] w-full object-cover mix-blend-screen"
+        autoplay
+        muted
+        loop
+        playsinline
         aria-hidden="true"
       >
-      </div>
-      <span class="fire-ember" style="left:44%;bottom:42%;--dx:10px;--dur:3.4s;--dly:0s"></span>
-      <span class="fire-ember" style="left:54%;bottom:46%;--dx:-8px;--dur:4.2s;--dly:1.2s"></span>
-      <span class="fire-ember" style="left:60%;bottom:40%;--dx:12px;--dur:3.8s;--dly:2.1s"></span>
+        <source src={asset('/assets/img/fuego-loop.mp4')} type="video/mp4" />
+      </video>
     </figure>
 
     <!-- Cita editorial (pull-quote), solapando -->
