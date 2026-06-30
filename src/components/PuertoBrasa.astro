@@ -4,7 +4,7 @@ import { asset } from '../lib/asset';
 ---
 
 <section id="puerto" class="relative scroll-mt-24 overflow-hidden bg-tinta py-20 text-papel md:py-28">
-  <!-- Vídeo en bucle: parrilla a la brasa (la llama se mueve sola). Desktop a sangre. -->
+  <!-- Vídeo en bucle: pescado a la brasa, a cámara lenta (playbackRate). Desktop a sangre. -->
   <video
     class="absolute right-0 top-0 hidden h-full w-[42%] object-cover md:block"
     autoplay
@@ -12,8 +12,8 @@ import { asset } from '../lib/asset';
     loop
     playsinline
     preload="metadata"
-    poster={asset('/assets/img/puerto-brasa-fuego.jpg')}
-    aria-label="Parrilla a la brasa en Sal Marina"
+    poster={asset('/assets/img/lonja-pescado-brasa.jpg')}
+    aria-label="Pescado a la brasa en Sal Marina"
   >
     <source src={asset('/assets/img/brasa-loop.mp4')} type="video/mp4" />
   </video>
@@ -55,7 +55,7 @@ import { asset } from '../lib/asset';
       </div>
     </div>
 
-    <!-- Vídeo en bucle (móvil): parrilla a la brasa -->
+    <!-- Vídeo en bucle (móvil): pescado a la brasa, a cámara lenta -->
     <figure class="reveal mt-12 overflow-hidden md:hidden">
       <video
         class="aspect-[4/3] w-full object-cover"
@@ -64,8 +64,8 @@ import { asset } from '../lib/asset';
         loop
         playsinline
         preload="metadata"
-        poster={asset('/assets/img/puerto-brasa-fuego.jpg')}
-        aria-label="Parrilla a la brasa en Sal Marina"
+        poster={asset('/assets/img/lonja-pescado-brasa.jpg')}
+        aria-label="Pescado a la brasa en Sal Marina"
       >
         <source src={asset('/assets/img/brasa-loop.mp4')} type="video/mp4" />
       </video>
@@ -85,3 +85,17 @@ import { asset } from '../lib/asset';
     </figure>
   </div>
 </section>
+
+<script>
+  // Efecto "slow-mo": reproducir el vídeo de la brasa más lento (cinematográfico).
+  const RATE = 0.6;
+  document.querySelectorAll('#puerto video').forEach((el) => {
+    const v = el as HTMLVideoElement;
+    const setRate = () => {
+      v.playbackRate = RATE;
+    };
+    setRate();
+    v.addEventListener('loadedmetadata', setRate);
+    v.addEventListener('play', setRate);
+  });
+</script>
