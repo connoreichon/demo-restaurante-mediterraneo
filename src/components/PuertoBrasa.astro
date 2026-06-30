@@ -1,7 +1,6 @@
 ---
 import { site, citaDestacada } from '../data/site';
 import { asset } from '../lib/asset';
-const anios = site.anioActual - site.fundadoEn;
 ---
 
 <section id="puerto" class="relative scroll-mt-24 overflow-hidden bg-tinta py-20 text-papel md:py-28">
@@ -36,16 +35,16 @@ const anios = site.anioActual - site.fundadoEn;
         </p>
       </div>
 
-      <!-- Números como sellos (marginalia), no métricas de SaaS -->
+      <!-- Sellos / etiquetas editoriales (sin estadísticas) -->
       <div class="reveal mt-10 flex flex-wrap gap-4">
         <div class="sello h-24 w-24 rotate-[-6deg]">
-          <span><span class="font-display text-2xl not-italic">{anios}</span><br /><span class="kicker text-[0.5rem]">años abiertos</span></span>
+          <span><span class="font-display text-lg not-italic leading-tight">De la<br />lonja</span></span>
         </div>
         <div class="sello h-24 w-24 rotate-[4deg]">
-          <span><span class="font-display text-xl not-italic leading-none">Lonja</span><br /><span class="kicker text-[0.5rem]">cada mañana</span></span>
+          <span><span class="font-display text-lg not-italic leading-tight">A la<br />brasa</span></span>
         </div>
         <div class="sello h-24 w-24 rotate-[-3deg]">
-          <span><span class="font-display text-2xl not-italic">100%</span><br /><span class="kicker text-[0.5rem]">producto isla</span></span>
+          <span class="px-2"><span class="font-display text-base not-italic leading-tight">Producto<br />de la isla</span></span>
         </div>
       </div>
     </div>
@@ -67,8 +66,7 @@ const anios = site.anioActual - site.fundadoEn;
         {citaDestacada.texto}
       </blockquote>
       <figcaption class="mt-5 flex items-center gap-3 text-papel/70">
-        <span class="text-oro">★ {citaDestacada.estrellas}</span>
-        <span class="h-px w-8 bg-papel/30"></span>
+        <span class="h-px w-10 bg-oro"></span>
         <span class="font-medium text-papel">{citaDestacada.autor}</span>
         <span class="text-sm text-papel/50">· {citaDestacada.detalle}</span>
       </figcaption>

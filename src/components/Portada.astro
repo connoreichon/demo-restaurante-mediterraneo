@@ -48,25 +48,26 @@ const palabras = site.titularHero.split(' ');
         }
       </h1>
 
-      <div class="reveal mt-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-        <p class="max-w-md text-papel/80">{site.subtituloHero}</p>
+      <div class="reveal mt-8 max-w-md">
+        <p class="text-papel/80">{site.subtituloHero}</p>
 
-        <a
-          href="#reserva"
-          class="group inline-flex shrink-0 items-center gap-3 font-display text-2xl italic"
-        >
-          Reservar mesa
-          <span class="h-px w-8 bg-brasa-400 transition-all group-hover:w-12"></span>
+        <!-- Reserva como línea de carta (no botón genérico) -->
+        <a href="#reserva" class="leader group mt-6 text-papel">
+          <span class="font-display text-2xl italic">Reservar mesa</span>
+          <span class="leader__fill"></span>
+          <span class="kicker text-brasa-400">hoy</span>
         </a>
       </div>
 
-      <!-- Línea de datos clave (integrada, no badges) -->
-      <div class="reveal mt-9 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-papel/20 pt-5 text-sm text-papel/70">
-        <span>{site.direccion}</span>
-        <span class="text-papel/30">/</span>
-        <span class="text-oro">★ {site.rating} · {site.ratingFuente}</span>
-        <span class="text-papel/30">/</span>
-        <a href={waLink} target="_blank" rel="noopener" class="underline-offset-4 hover:text-papel hover:underline">
+      <!-- Línea de datos clave (integrada, no badges, sin reseñas) -->
+      <div class="reveal mt-9 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-papel/20 pt-5 text-sm text-papel/70">
+        <span>Palma de Mallorca</span>
+        <span class="text-papel/30">·</span>
+        <span>Desde {site.fundadoEn}</span>
+        <span class="text-papel/30">·</span>
+        <span>Cocina de mercado</span>
+        <span class="text-papel/30">·</span>
+        <a href={waLink} target="_blank" rel="noopener" class="text-brasa-400 underline-offset-4 hover:underline">
           Reserva por WhatsApp
         </a>
       </div>

@@ -54,7 +54,36 @@ export const site = {
   anioActual: new Date().getFullYear()
 };
 
-// --- Hoy en la mesa (carta, no "cards") -------------------------------------
+// --- Hoy entra por lonja (3 productos del día, formato pizarra) -------------
+// `origen`: etiqueta de procedencia. `preparacion`: nota corta. `precio`: 's/m'.
+export const lonja = {
+  nota: 'Lo que ha entrado esta mañana. Cuando se acaba, se acaba.',
+  productos: [
+    {
+      nombre: 'Dorada de la bahía',
+      origen: 'Lonja de Palma',
+      preparacion: 'A la sal o a la brasa de leña',
+      precio: 's/m',
+      imagen: '/assets/plato-pescado-brasa.svg'
+    },
+    {
+      nombre: 'Gamba roja de Sóller',
+      origen: 'Costa de Tramuntana',
+      preparacion: 'A la plancha, solo sal y aceite',
+      precio: 's/m',
+      imagen: '/assets/plato-arroz-marisco.svg'
+    },
+    {
+      nombre: 'Sepia y su tinta',
+      origen: 'Lonja de Palma',
+      preparacion: 'A la brasa, con alioli suave',
+      precio: '18',
+      imagen: '/assets/plato-verduras-temporada.svg'
+    }
+  ]
+};
+
+// --- Carta (resto, por si se reutiliza) -------------------------------------
 // `precio`: usa 's/m' (según mercado) para dar sensación de carta real.
 // `nota`: nota manuscrita del chef (se muestra en tipografía a mano).
 export const carta = {
