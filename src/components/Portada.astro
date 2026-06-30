@@ -37,7 +37,7 @@ const palabras = site.titularHero.split(' ');
       {
         palabras.map((p) =>
           p.toLowerCase().replace(/[,.]/g, '') === 'brasa' ? (
-            <span class="italic text-brasa-400">{p} </span>
+            <span class="font-hand text-[1.15em] font-bold leading-none text-brasa-400">{p} </span>
           ) : (
             <span>{p} </span>
           )

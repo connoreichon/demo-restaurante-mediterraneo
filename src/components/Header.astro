@@ -105,21 +105,27 @@ const nav = [
   const panel = document.querySelector('[data-menu-panel]') as HTMLElement | null;
   const closeBtn = document.querySelector('[data-menu-close]') as HTMLButtonElement | null;
 
-  // Cambia a "tinta sobre papel" al salir de la portada
+  // 3 estados para que el header NUNCA deje cruzar el titular por detrás:
+  //  - top  (arriba del todo): transparente con degradado (look inmersivo)
+  //  - hero (con scroll, aún en la portada): barra OPACA oscura -> tapa el contenido
+  //  - past (pasada la portada): barra OPACA clara
+  const TOP = [
+    'bg-gradient-to-b',
+    'from-tinta/85',
+    'via-tinta/40',
+    'to-transparent',
+    'text-papel'
+  ];
+  const HERO = ['bg-tinta/95', 'backdrop-blur', 'shadow-soft', 'text-papel'];
+  const PAST = ['bg-papel/95', 'backdrop-blur', 'shadow-soft', 'border-b', 'border-tinta/10', 'text-tinta'];
+
   const onScroll = () => {
     if (!header) return;
-    const solid = window.scrollY > window.innerHeight * 0.82;
-    header.classList.toggle('text-tinta', solid);
-    header.classList.toggle('text-papel', !solid);
-    header.classList.toggle('bg-papel/95', solid);
-    header.classList.toggle('backdrop-blur', solid);
-    header.classList.toggle('border-b', solid);
-    header.classList.toggle('border-tinta/10', solid);
-    // El degradado de protección solo cuando el header está sobre el hero
-    header.classList.toggle('bg-gradient-to-b', !solid);
-    header.classList.toggle('from-tinta/85', !solid);
-    header.classList.toggle('via-tinta/40', !solid);
-    header.classList.toggle('to-transparent', !solid);
+    const y = window.scrollY;
+    header.classList.remove(...TOP, ...HERO, ...PAST);
+    if (y <= 8) header.classList.add(...TOP);
+    else if (y <= window.innerHeight * 0.85) header.classList.add(...HERO);
+    else header.classList.add(...PAST);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
