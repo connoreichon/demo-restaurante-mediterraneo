@@ -2,48 +2,75 @@
 import { site } from '../data/site';
 import { asset } from '../lib/asset';
 import WhatsAppIcon from './WhatsAppIcon.astro';
+import LogoMark from './LogoMark.astro';
 const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
 const tel = `tel:${site.telefono.replace(/\s/g, '')}`;
 ---
 
-<section id="reserva" class="bg-noche text-papel">
-  <div class="container-x py-20 md:py-28">
-    <header class="reveal flex items-end gap-5">
-      <span class="sec-num text-7xl text-brasa-400/40 md:text-8xl">IV</span>
-      <div>
-        <p class="kicker text-brasa-400">Reservas</p>
-        <h2 class="display mt-2 text-5xl md:text-6xl">Te guardamos sitio</h2>
+<section id="reserva" class="relative overflow-hidden bg-noche text-papel">
+  <!-- Atmósfera: foto tenue del puerto + resplandor cálido, para dar profundidad -->
+  <img
+    src={asset('/assets/img/galeria-1-terraza-puerto.jpg')}
+    alt=""
+    aria-hidden="true"
+    class="absolute inset-0 h-full w-full object-cover opacity-[0.10]"
+    loading="lazy"
+  />
+  <div class="absolute inset-0 bg-gradient-to-b from-noche/85 via-noche/92 to-noche"></div>
+  <div
+    class="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full"
+    style="background:radial-gradient(circle, rgba(189,68,34,0.22), transparent 70%)"
+  >
+  </div>
+
+  <div class="container-x relative py-20 md:py-28">
+    <!-- Cabecera (mismo patrón editorial que el resto de secciones) -->
+    <header class="reveal flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div class="flex items-end gap-5">
+        <span class="sec-num text-7xl text-brasa-400/40 md:text-8xl">IV</span>
+        <div>
+          <p class="kicker text-oro">Reservas</p>
+          <h2 class="display mt-2 text-5xl md:text-6xl">Te guardamos sitio</h2>
+        </div>
       </div>
+      <p class="nota max-w-[14rem] text-oro md:text-right">Te respondemos al momento, sin formularios.</p>
     </header>
 
-    <div class="mt-12 md:grid md:grid-cols-12 md:gap-14">
+    <div class="mt-12 grid gap-12 md:mt-16 md:grid-cols-12 md:gap-0">
       <!-- Acción principal -->
-      <div class="reveal md:col-span-7">
-        <p class="display max-w-lg text-3xl leading-tight text-papel/90 md:text-4xl">
-          Llámanos o escríbenos por WhatsApp. Te respondemos al momento, sin formularios.
+      <div class="reveal md:col-span-7 md:border-r md:border-papel/10 md:pr-14">
+        <p class="display max-w-xl text-3xl leading-[1.08] md:text-[2.7rem]">
+          Llámanos o escríbenos <span class="italic text-brasa-400">y reservamos</span> tu mesa.
         </p>
 
-        <div class="mt-9 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
+        <!-- WhatsApp + teléfono -->
+        <div class="mt-10 flex flex-col gap-7">
           <a
             href={waLink}
             target="_blank"
             rel="noopener"
-            class="inline-flex shrink-0 items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-[#25D366] px-6 py-3.5 font-semibold text-white shadow-[0_14px_34px_-14px_rgba(37,211,102,0.85)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1faf53]"
+            class="inline-flex w-fit items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-[#25D366] px-7 py-4 font-semibold text-white shadow-[0_16px_40px_-16px_rgba(37,211,102,0.9)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1faf53]"
           >
             <WhatsAppIcon class="h-5 w-5" />
             Reservar por WhatsApp
           </a>
-          <a href={tel} class="group inline-flex items-center gap-3 font-display text-2xl italic md:text-3xl">
-            {site.telefono}
-            <span class="h-px w-7 bg-brasa-400 transition-all group-hover:w-11"></span>
-          </a>
+
+          <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span class="kicker text-papel/45">o llámanos</span>
+            <a href={tel} class="group inline-flex items-center gap-3 font-display text-3xl italic md:text-4xl">
+              {site.telefono}
+              <span class="h-px w-8 bg-brasa-400 transition-all group-hover:w-12"></span>
+            </a>
+          </div>
         </div>
 
-        <p class="mt-7 max-w-md text-papel/55">¿Grupo grande o evento? Escríbenos a <a href={`mailto:${site.email}`} class="text-papel underline-offset-4 hover:underline">{site.email}</a> y te preparamos un menú.</p>
+        <p class="mt-9 max-w-md text-papel/55">
+          ¿Grupo grande o evento? Escríbenos a <a href={`mailto:${site.email}`} class="text-papel underline-offset-4 hover:underline">{site.email}</a> y te preparamos un menú.
+        </p>
       </div>
 
-      <!-- Horario + ubicación + mapa, integrados -->
-      <div class="reveal mt-14 md:col-span-5 md:mt-0">
+      <!-- Horario + ubicación -->
+      <div class="reveal md:col-span-5 md:pl-14">
         <p class="kicker text-oro">Horario</p>
         <ul class="mt-5 space-y-3">
           {
@@ -63,16 +90,16 @@ const tel = `tel:${site.telefono.replace(/\s/g, '')}`;
         <div class="my-7 hairline"></div>
 
         <p class="kicker text-oro">Dónde estamos</p>
-        <p class="mt-4 font-display text-2xl leading-tight">{site.direccion}</p>
-        <p class="text-papel/70">{site.ciudad}</p>
+        <p class="mt-3 font-display text-2xl leading-tight">{site.direccion}</p>
+        <p class="text-papel/65">{site.ciudad}</p>
 
-        <!-- Mapa compacto, editorial (no rectángulo grande vacío) -->
+        <!-- Ubicación como foto editorial enlazada a Google Maps -->
         {
           site.mapsEmbed ? (
             <iframe
               src={site.mapsEmbed}
               title="Mapa de ubicación de Sal Marina"
-              class="mt-5 block aspect-[5/3] w-full border border-papel/15 grayscale"
+              class="mt-5 block aspect-[16/10] w-full border border-papel/15 grayscale"
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
             />
@@ -81,35 +108,38 @@ const tel = `tel:${site.telefono.replace(/\s/g, '')}`;
               href={site.mapsLink}
               target="_blank"
               rel="noopener"
-              class="group mt-5 block overflow-hidden border border-papel/15"
+              class="group mt-5 block overflow-hidden ring-1 ring-papel/12"
               aria-label="Abrir ubicación en Google Maps"
             >
-              <span class="relative block aspect-[5/3]">
+              <span class="relative block aspect-[16/10]">
                 <img
                   src={asset('/assets/img/galeria-1-terraza-puerto.jpg')}
                   alt=""
-                  class="h-full w-full object-cover opacity-30 transition-opacity duration-500 group-hover:opacity-40"
+                  class="h-full w-full object-cover opacity-55 transition-all duration-700 group-hover:scale-105 group-hover:opacity-70"
                   loading="lazy"
                 />
-                <span
-                  class="pointer-events-none absolute inset-0 opacity-25"
-                  style="background-image:linear-gradient(rgba(243,233,216,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(243,233,216,.14) 1px,transparent 1px);background-size:30px 30px;"
-                />
-                <span class="absolute left-4 top-4">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d96a3f" stroke-width="1.8">
+                <span class="absolute inset-0 bg-gradient-to-t from-noche via-noche/30 to-transparent" />
+                <span class="absolute bottom-3.5 left-4 flex items-center gap-2.5 text-papel">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d96a3f" stroke-width="1.8">
                     <path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z" />
                     <circle cx="12" cy="10" r="2.5" fill="#d96a3f" stroke="none" />
                   </svg>
-                </span>
-                <span class="absolute bottom-3 left-4 flex items-center gap-2 text-papel">
                   <span class="kicker">Cómo llegar</span>
-                  <span class="h-px w-6 bg-brasa-400 transition-all group-hover:w-9"></span>
+                  <span class="h-px w-6 bg-brasa-400 transition-all group-hover:w-10"></span>
                 </span>
               </span>
             </a>
           )
         }
       </div>
+    </div>
+
+    <!-- Cierre: sello con el emblema -->
+    <div class="reveal mt-16 flex items-center gap-5 text-papel/55 md:mt-24">
+      <span class="h-px flex-1 bg-papel/12"></span>
+      <LogoMark class="h-7 w-7 shrink-0" />
+      <span class="brand whitespace-nowrap text-xs">Frente al puerto · Palma</span>
+      <span class="h-px flex-1 bg-papel/12"></span>
     </div>
   </div>
 </section>
