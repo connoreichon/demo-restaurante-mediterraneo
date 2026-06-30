@@ -15,16 +15,22 @@ restaurantes, cafeterías, tiendas u otros negocios locales.
 - Sin librerías JS pesadas: animaciones y menú con JS nativo.
 - Tipografías **Cormorant Garamond + Inter** (Google Fonts, licencia abierta).
 
-## Qué incluye
-- Home completa de una sola página con navegación ancla.
-- **Hero** a pantalla completa con CTA a reserva/WhatsApp y prueba social.
-- **Especialidades** (4 platos).
-- **Nosotros** (historia + datos).
-- **Galería** visual (grid responsive).
-- **Opiniones** (testimonios).
-- **Horario** + **Ubicación** con mapa (placeholder a Google Maps).
-- **Contacto** con formulario de reserva (demo, no envía).
-- **Footer** + **WhatsApp flotante**.
+## Dirección visual
+Editorial mediterránea con alma de "lonja y brasa": tipografía **Fraunces** (display)
++ **Caveat** (notas del chef manuscritas), papel con textura, composición asimétrica,
+numeración romana de secciones, líneas de puntos tipo carta y sellos en vez de stats.
+Sin grids de cards ni el típico esqueleto de plantilla.
+
+## Estructura de la home
+- **Portada editorial** a pantalla completa: titular dramático, datos integrados en una
+  línea fina (no badges), CTA a reserva/WhatsApp. Composición asimétrica, sin split texto/foto.
+- **I · Hoy en la mesa**: la carta como menú real (líneas de puntos, precios, notas del
+  chef manuscritas) + collage de platos descentrado. No cards.
+- **II · Del puerto a la brasa**: bloque narrativo oscuro, imagen a sangre, números como
+  sellos y una cita editorial destacada (en vez de un grid de testimonios).
+- **III · La sala, la terraza, el fuego**: foto destacada a lo ancho + galería masonry asimétrica.
+- **IV · Reserva**: cierre en azul-noche que fusiona horario + WhatsApp + ubicación + mapa.
+- **Footer** limpio + **WhatsApp flotante**.
 - Responsive móvil / tablet / desktop. SEO básico + datos estructurados (Schema.org).
 
 ## Cómo arrancar (local)
@@ -65,14 +71,13 @@ npm run gen:assets # regenera placeholders SVG
 ```
 src/
 ├── data/site.ts            ← TODOS los datos del cliente (editar aquí)
-├── styles/global.css       ← tokens de marca (colores, fuentes)
+├── styles/global.css       ← tokens de marca (colores, fuentes, utilidades editoriales)
 ├── layouts/Base.astro      ← <head>, SEO, fuentes, script de animación
 ├── lib/asset.ts            ← helper de rutas (respeta el `base` de Pages)
-├── components/             ← Header, Hero, Especialidades, Nosotros,
-│                             Galeria, Opiniones, HorarioUbicacion,
-│                             Contacto, Footer, WhatsAppFloat
+├── components/             ← Header, Portada, HoyEnLaMesa, PuertoBrasa,
+│                             GaleriaEditorial, Reserva, Footer, WhatsAppFloat
 └── pages/index.astro       ← ensambla la home
-public/assets/              ← imágenes (placeholders SVG bien nombrados)
+public/assets/              ← imágenes (placeholders SVG atmosféricos, bien nombrados)
 tools/gen-placeholders.mjs  ← generador de los placeholders
 ```
 

@@ -2,41 +2,36 @@
 import { site } from '../data/site';
 ---
 
-<footer class="bg-carbon-700 py-12 text-crema/70">
-  <div class="container-x grid gap-8 md:grid-cols-3">
-    <div>
-      <p class="font-display text-2xl italic text-crema">{site.nombre}</p>
-      <p class="mt-2 text-sm">{site.reclamo} · desde {site.fundadoEn}</p>
-    </div>
-
-    <div class="text-sm">
-      <p class="mb-2 font-semibold uppercase tracking-wide text-crema/50">Contacto</p>
-      <p>{site.direccion}, {site.ciudad}</p>
-      <p>
-        <a href={`tel:${site.telefono.replace(/\s/g, '')}`} class="hover:text-arena">{site.telefono}</a>
-      </p>
-      <p><a href={`mailto:${site.email}`} class="hover:text-arena">{site.email}</a></p>
-    </div>
-
-    <div class="text-sm">
-      <p class="mb-2 font-semibold uppercase tracking-wide text-crema/50">Síguenos</p>
-      <div class="flex gap-4">
-        <a href={site.redes.instagram} target="_blank" rel="noopener" class="hover:text-arena">Instagram</a>
-        <a href={site.redes.facebook} target="_blank" rel="noopener" class="hover:text-arena">Facebook</a>
+<footer class="bg-tinta text-papel/70">
+  <div class="container-x py-14">
+    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="font-display text-4xl italic text-papel">Sal Marina</p>
+        <p class="kicker mt-3 text-papel/50">Cocina mediterránea · desde {site.fundadoEn}</p>
+      </div>
+      <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm">
+        <a href={`tel:${site.telefono.replace(/\s/g, '')}`} class="hover:text-papel">{site.telefono}</a>
+        <a href={`mailto:${site.email}`} class="hover:text-papel">{site.email}</a>
+        <a href={site.redes.instagram} target="_blank" rel="noopener" class="hover:text-papel">Instagram</a>
+        <a href={site.redes.facebook} target="_blank" rel="noopener" class="hover:text-papel">Facebook</a>
       </div>
     </div>
-  </div>
 
-  <div class="container-x mt-10 flex flex-col gap-2 border-t border-crema/10 pt-6 text-xs text-crema/40 sm:flex-row sm:items-center sm:justify-between">
-    <p>© {site.anioActual} {site.razonSocial}. Todos los derechos reservados.</p>
-    <p class="flex gap-4">
-      <a href="#" class="hover:text-crema/70">Aviso legal</a>
-      <a href="#" class="hover:text-crema/70">Privacidad</a>
-      <a href="#" class="hover:text-crema/70">Cookies</a>
+    <div class="my-9 hairline text-papel"></div>
+
+    <div class="flex flex-col gap-3 text-xs text-papel/40 sm:flex-row sm:items-center sm:justify-between">
+      <p>{site.direccion} · {site.ciudad}</p>
+      <p class="flex gap-5">
+        <a href="#" class="hover:text-papel/70">Aviso legal</a>
+        <a href="#" class="hover:text-papel/70">Privacidad</a>
+        <a href="#" class="hover:text-papel/70">Cookies</a>
+      </p>
+      <p>© {site.anioActual} {site.razonSocial}</p>
+    </div>
+
+    <p class="mt-6 text-[11px] text-papel/30">
+      Web de demostración · datos, fotos y textos ficticios. Las imágenes son placeholders
+      generados, sin derechos; en producción se sustituyen por fotos reales del cliente.
     </p>
   </div>
-
-  <p class="container-x mt-4 text-[11px] text-crema/30">
-    Web de demostración · diseño de muestra para portfolio. Datos, fotos y textos ficticios.
-  </p>
 </footer>

@@ -1,0 +1,75 @@
+---
+import { carta } from '../data/site';
+import { asset } from '../lib/asset';
+---
+
+<section id="carta" class="relative scroll-mt-24 overflow-hidden py-20 md:py-28">
+  <div class="container-x">
+    <!-- Intro -->
+    <header class="reveal mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+      <div class="flex items-end gap-5">
+        <span class="sec-num text-7xl text-brasa/30 md:text-8xl">I</span>
+        <div>
+          <p class="kicker text-brasa">La carta</p>
+          <h2 class="display mt-2 text-5xl md:text-6xl">Hoy en la mesa</h2>
+        </div>
+      </div>
+      <p class="nota max-w-xs text-oliva md:text-right">{carta.nota}</p>
+    </header>
+
+    <div class="md:grid md:grid-cols-12 md:gap-12">
+      <!-- Collage de platos (descentrado) -->
+      <div class="relative md:col-span-5">
+        <!-- Móvil: una sola imagen -->
+        <figure class="reveal mb-10 md:hidden">
+          <img
+            src={asset(carta.platos[0].imagen)}
+            alt={carta.platos[0].nombre}
+            class="aspect-[4/3] w-full object-cover"
+            loading="lazy"
+          />
+          <figcaption class="mt-2 font-display text-xl italic text-tinta/70">{carta.platos[0].nombre}</figcaption>
+        </figure>
+
+        <!-- Desktop: collage solapado y rotado -->
+        <div class="relative hidden h-full min-h-[34rem] md:block">
+          <figure class="reveal absolute left-0 top-2 w-60 rotate-[-4deg] shadow-[0_30px_60px_-30px_rgba(23,19,13,0.6)]">
+            <img src={asset(carta.platos[0].imagen)} alt={carta.platos[0].nombre} class="aspect-square w-full object-cover" loading="lazy" />
+          </figure>
+          <div class="sello absolute left-52 top-0 z-10 h-24 w-24 -rotate-12 bg-papel">
+            <span class="px-2"><span class="font-display text-2xl not-italic">s/m</span><br /><span class="kicker text-[0.55rem]">según mercado</span></span>
+          </div>
+          <figure class="reveal absolute bottom-0 right-2 w-56 rotate-[3deg] shadow-[0_30px_60px_-30px_rgba(23,19,13,0.6)]">
+            <img src={asset(carta.platos[1].imagen)} alt={carta.platos[1].nombre} class="aspect-[4/5] w-full object-cover" loading="lazy" />
+            <figcaption class="nota mt-2 text-right text-oliva">{carta.platos[1].nota}</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- La carta -->
+      <ol class="md:col-span-7">
+        {
+          carta.platos.map((p, i) => (
+            <li class="reveal border-b border-tinta/15 py-6 first:border-t">
+              <div class="leader">
+                <h3 class="display text-2xl md:text-[1.7rem]">
+                  <span class="mr-3 align-middle text-sm text-oro">{String(i + 1).padStart(2, '0')}</span>
+                  {p.nombre}
+                </h3>
+                <span class="leader__fill" />
+                <span class="font-display text-xl italic text-brasa">{p.precio === 's/m' ? 's/m' : `${p.precio} €`}</span>
+              </div>
+              <div class="mt-2 flex flex-col gap-1 pl-9 md:flex-row md:items-baseline md:justify-between md:gap-8">
+                <p class="max-w-md text-tinta/70">{p.descripcion}</p>
+                {p.nota && <p class="nota shrink-0 text-oliva">{p.nota}</p>}
+              </div>
+            </li>
+          ))
+        }
+        <li class="reveal pt-6 text-sm text-tinta/55">
+          Opciones vegetarianas y sin gluten · Consúltanos alérgenos · La carta cambia cada mes
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>

@@ -1,7 +1,7 @@
-// Genera placeholders SVG editoriales (sin derechos) para la demo.
+// Genera placeholders SVG ATMOSFÉRICOS (sin derechos, sin texto incrustado).
+// Buscan parecer fotografía real: luz cálida, sombras, grano y viñeta.
 // Uso: npm run gen:assets
-// Para adaptar a un cliente real: sustituye los .svg/.png de /public/assets
-// por fotos reales con el MISMO nombre de archivo (ver CAMBIAR_DATOS_CLIENTE.md).
+// Para un cliente real: sustituye los .svg por fotos reales con el MISMO nombre.
 
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -11,115 +11,155 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, '..', 'public', 'assets');
 mkdirSync(OUT, { recursive: true });
 
-// Paleta mediterránea
-const PAL = {
-  carbon: '#1A1A18',
-  carbon2: '#26241F',
-  crema: '#F5EFE6',
-  terracota: '#C1440E',
-  terracota2: '#E0683A',
-  oliva: '#6B7340',
-  arena: '#C9A86A'
-};
-
-function esc(s) {
-  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-// Un placeholder = degradado cálido + glow + textura (turbulencia) + blobs suaves
-// + tratamiento tipográfico editorial (eyebrow + título serif).
-function svg({
-  w,
-  h,
-  bg = PAL.carbon,
-  bg2 = PAL.carbon2,
-  glow = PAL.terracota,
-  ink = PAL.crema,
-  eyebrow = '',
-  title = '',
-  dark = true,
-  id = 'p'
-}) {
-  const fontTitle = Math.round(Math.min(w, h) * (title.length > 14 ? 0.085 : 0.11));
-  const fontEye = Math.round(Math.min(w, h) * 0.032);
-  const blob = (cx, cy, r, c, o) =>
-    `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}" opacity="${o}" filter="url(#soft-${id})"/>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(title || 'placeholder')}">
+// Escena = base oscura/clara + 2-3 focos de luz de color + viñeta + grano.
+// `lights`: [{x,y,r,color,op}] focos difusos (simulan luz/comida/ambiente).
+function scene({ w, h, id, base, base2, lights = [], vignette = 0.55, grain = 0.05, caption = '' }) {
+  const blur = Math.round(Math.min(w, h) * 0.09);
+  const lightEls = lights
+    .map(
+      (l, i) =>
+        `<circle cx="${w * l.x}" cy="${h * l.y}" r="${Math.min(w, h) * l.r}" fill="${l.color}" opacity="${l.op}" filter="url(#blur-${id})"/>`
+    )
+    .join('\n  ');
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="${caption || 'Sal Marina'}">
   <defs>
-    <linearGradient id="grad-${id}" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="${bg}"/>
-      <stop offset="1" stop-color="${bg2}"/>
+    <linearGradient id="base-${id}" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="${base}"/>
+      <stop offset="1" stop-color="${base2}"/>
     </linearGradient>
-    <radialGradient id="glow-${id}" cx="0.7" cy="0.3" r="0.9">
-      <stop offset="0" stop-color="${glow}" stop-opacity="0.55"/>
-      <stop offset="0.5" stop-color="${glow}" stop-opacity="0.12"/>
-      <stop offset="1" stop-color="${glow}" stop-opacity="0"/>
+    <radialGradient id="vig-${id}" cx="0.5" cy="0.42" r="0.75">
+      <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="${vignette}"/>
     </radialGradient>
-    <filter id="soft-${id}"><feGaussianBlur stdDeviation="${Math.round(Math.min(w, h) * 0.07)}"/></filter>
-    <filter id="noise-${id}">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+    <filter id="blur-${id}"><feGaussianBlur stdDeviation="${blur}"/></filter>
+    <filter id="grain-${id}">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
       <feColorMatrix type="saturate" values="0"/>
-      <feComponentTransfer><feFuncA type="linear" slope="${dark ? 0.06 : 0.05}"/></feComponentTransfer>
+      <feComponentTransfer><feFuncA type="linear" slope="${grain}"/></feComponentTransfer>
       <feComposite operator="over" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <rect width="${w}" height="${h}" fill="url(#grad-${id})"/>
-  ${blob(w * 0.78, h * 0.28, Math.min(w, h) * 0.32, glow, 0.5)}
-  ${blob(w * 0.2, h * 0.82, Math.min(w, h) * 0.28, PAL.oliva, 0.28)}
-  ${blob(w * 0.5, h * 0.5, Math.min(w, h) * 0.22, PAL.arena, 0.18)}
-  <rect width="${w}" height="${h}" fill="url(#glow-${id})"/>
-  <rect width="${w}" height="${h}" filter="url(#noise-${id})" opacity="0.7"/>
-  <rect x="${w * 0.04}" y="${h * 0.04}" width="${w * 0.92}" height="${h * 0.92}" fill="none" stroke="${ink}" stroke-opacity="0.18" stroke-width="${Math.max(1, Math.round(w * 0.0015))}"/>
-  ${
-    title
-      ? `<g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
-    ${eyebrow ? `<text x="${w / 2}" y="${h / 2 - fontTitle * 0.7}" font-family="Arial, Helvetica, sans-serif" font-size="${fontEye}" letter-spacing="${fontEye * 0.25}" fill="${ink}" fill-opacity="0.7">${esc(eyebrow.toUpperCase())}</text>` : ''}
-    <text x="${w / 2}" y="${h / 2 + fontTitle * 0.35}" font-size="${fontTitle}" font-style="italic" fill="${ink}">${esc(title)}</text>
-  </g>`
-      : ''
-  }
+  <rect width="${w}" height="${h}" fill="url(#base-${id})"/>
+  ${lightEls}
+  <rect width="${w}" height="${h}" fill="url(#vig-${id})"/>
+  <rect width="${w}" height="${h}" filter="url(#grain-${id})" opacity="0.6"/>
+</svg>`;
+}
+
+// Plato: superficie de mesa + "plato" circular con luz cenital + comida difusa.
+function plato({ id, surface, surface2, plate, food, accent }) {
+  const w = 900,
+    h = 900;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" role="img" aria-label="Plato Sal Marina">
+  <defs>
+    <radialGradient id="srf-${id}" cx="0.5" cy="0.35" r="0.85">
+      <stop offset="0" stop-color="${surface}"/>
+      <stop offset="1" stop-color="${surface2}"/>
+    </radialGradient>
+    <radialGradient id="plt-${id}" cx="0.45" cy="0.4" r="0.6">
+      <stop offset="0" stop-color="${plate}"/>
+      <stop offset="0.78" stop-color="${plate}"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.25"/>
+    </radialGradient>
+    <filter id="b-${id}"><feGaussianBlur stdDeviation="34"/></filter>
+    <filter id="g-${id}">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="${w}" height="${h}" fill="url(#srf-${id})"/>
+  <circle cx="${w * 0.5}" cy="${h * 0.5}" r="${w * 0.36}" fill="#000" opacity="0.18" filter="url(#b-${id})"/>
+  <circle cx="${w * 0.5}" cy="${h * 0.48}" r="${w * 0.34}" fill="url(#plt-${id})"/>
+  <circle cx="${w * 0.46}" cy="${h * 0.46}" r="${w * 0.17}" fill="${food}" opacity="0.85" filter="url(#b-${id})"/>
+  <circle cx="${w * 0.58}" cy="${h * 0.54}" r="${w * 0.1}" fill="${accent}" opacity="0.8" filter="url(#b-${id})"/>
+  <circle cx="${w * 0.52}" cy="${h * 0.42}" r="${w * 0.06}" fill="#fff" opacity="0.12" filter="url(#b-${id})"/>
+  <rect width="${w}" height="${h}" filter="url(#g-${id})" opacity="0.6"/>
 </svg>`;
 }
 
 function logoSvg() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64" role="img" aria-label="Sal Marina">
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="260" height="70" viewBox="0 0 260 70" role="img" aria-label="Sal Marina">
   <g font-family="Georgia, 'Times New Roman', serif">
-    <text x="0" y="30" font-size="26" font-style="italic" fill="${PAL.crema}">Sal</text>
-    <text x="52" y="30" font-size="26" fill="${PAL.terracota2}">Marina</text>
-    <line x1="0" y1="42" x2="168" y2="42" stroke="${PAL.arena}" stroke-width="1.2"/>
-    <text x="0" y="58" font-family="Arial, Helvetica, sans-serif" font-size="9.5" letter-spacing="4" fill="${PAL.crema}" fill-opacity="0.75">COCINA MEDITERRANEA</text>
+    <text x="0" y="34" font-size="30" font-style="italic" fill="#f4ece0">Sal Marina</text>
+    <line x1="2" y1="46" x2="198" y2="46" stroke="#c2a35f" stroke-width="1"/>
+    <text x="2" y="62" font-family="Arial, Helvetica, sans-serif" font-size="9.5" letter-spacing="5" fill="#f4ece0" fill-opacity="0.7">DESDE 1998 · PALMA</text>
   </g>
 </svg>`;
 }
 
+const INK = '#14110d';
 const files = {
   'logo.svg': logoSvg(),
-  'hero-restaurante.svg': svg({
-    w: 1600, h: 1000, id: 'hero', bg: '#15140F', bg2: '#2A2118', glow: PAL.terracota,
-    eyebrow: 'Frente al mar · desde 1998', title: 'Sal Marina'
+
+  // Portada: mar/puerto al anochecer, luz cálida arriba-derecha, sombra abajo.
+  'hero-restaurante.svg': scene({
+    w: 1800, h: 1200, id: 'hero', base: '#241b12', base2: '#0e0b08',
+    lights: [
+      { x: 0.78, y: 0.22, r: 0.55, color: '#e08a3c', op: 0.5 },
+      { x: 0.9, y: 0.4, r: 0.35, color: '#c2a35f', op: 0.35 },
+      { x: 0.2, y: 0.85, r: 0.5, color: '#3a4a2e', op: 0.3 },
+      { x: 0.45, y: 0.6, r: 0.3, color: '#bd4422', op: 0.18 }
+    ],
+    vignette: 0.6
   }),
-  'og-image.svg': svg({
-    w: 1200, h: 630, id: 'og', bg: '#15140F', bg2: '#2A2118', glow: PAL.terracota,
-    eyebrow: 'Cocina mediterranea', title: 'Sal Marina'
+
+  'og-image.svg': scene({
+    w: 1200, h: 630, id: 'og', base: '#241b12', base2: '#0e0b08',
+    lights: [
+      { x: 0.75, y: 0.25, r: 0.6, color: '#e08a3c', op: 0.5 },
+      { x: 0.25, y: 0.8, r: 0.5, color: '#3a4a2e', op: 0.3 }
+    ],
+    vignette: 0.55
   }),
-  'sobre-nosotros.svg': svg({
-    w: 1000, h: 1200, id: 'sobre', bg: PAL.carbon, bg2: '#322B22', glow: PAL.oliva,
-    eyebrow: 'Nuestra historia', title: 'A fuego lento'
+
+  // Narrativa "del puerto a la brasa": brasas, fuego desde abajo.
+  'sobre-nosotros.svg': scene({
+    w: 1200, h: 1500, id: 'brasa', base: '#1a0f09', base2: '#070504',
+    lights: [
+      { x: 0.5, y: 0.92, r: 0.6, color: '#d4521b', op: 0.6 },
+      { x: 0.35, y: 0.8, r: 0.3, color: '#f0a23a', op: 0.45 },
+      { x: 0.7, y: 0.85, r: 0.28, color: '#bd2f11', op: 0.4 }
+    ],
+    vignette: 0.62
   }),
-  'plato-pescado-brasa.svg': svg({ w: 900, h: 900, id: 'd1', glow: PAL.terracota, eyebrow: 'A la brasa', title: 'Pescado del dia' }),
-  'plato-arroz-marisco.svg': svg({ w: 900, h: 900, id: 'd2', glow: PAL.arena, eyebrow: 'En paellera', title: 'Arroz de marisco' }),
-  'plato-verduras-temporada.svg': svg({ w: 900, h: 900, id: 'd3', glow: PAL.oliva, eyebrow: 'De la huerta', title: 'Verduras de temporada' }),
-  'plato-postre-casero.svg': svg({ w: 900, h: 900, id: 'd4', glow: PAL.terracota2, eyebrow: 'Hecho en casa', title: 'Postre del chef' }),
-  'galeria-01.svg': svg({ w: 900, h: 1100, id: 'g1', glow: PAL.terracota, eyebrow: 'Sala', title: 'Ambiente' }),
-  'galeria-02.svg': svg({ w: 1100, h: 800, id: 'g2', glow: PAL.arena, eyebrow: 'Terraza', title: 'Atardecer' }),
-  'galeria-03.svg': svg({ w: 900, h: 900, id: 'g3', glow: PAL.oliva, eyebrow: 'Cocina', title: 'Producto' }),
-  'galeria-04.svg': svg({ w: 900, h: 900, id: 'g4', glow: PAL.terracota2, eyebrow: 'Detalle', title: 'Mesa puesta' }),
-  'galeria-05.svg': svg({ w: 1100, h: 800, id: 'g5', glow: PAL.arena, eyebrow: 'Barra', title: 'Vinos' }),
-  'galeria-06.svg': svg({ w: 900, h: 1100, id: 'g6', glow: PAL.terracota, eyebrow: 'Equipo', title: 'En la brasa' })
+
+  // Platos
+  'plato-pescado-brasa.svg': plato({ id: 'd1', surface: '#2a2018', surface2: '#140e09', plate: '#e9ddc7', food: '#7c6a4a', accent: '#bd4422' }),
+  'plato-arroz-marisco.svg': plato({ id: 'd2', surface: '#241a12', surface2: '#120c07', plate: '#1f1b14', food: '#c08a2e', accent: '#bd4422' }),
+  'plato-verduras-temporada.svg': plato({ id: 'd3', surface: '#23201a', surface2: '#100e0a', plate: '#ece3d4', food: '#5f6b3a', accent: '#8a9647' }),
+  'plato-postre-casero.svg': plato({ id: 'd4', surface: '#241a14', surface2: '#120b08', plate: '#efe7d8', food: '#caa15e', accent: '#9c5a2a' }),
+
+  // Galería — tonos variados (parecen fotos distintas)
+  'galeria-01.svg': scene({ // sala, ambiente dim cálido (vertical)
+    w: 1000, h: 1400, id: 'g1', base: '#2a2017', base2: '#0f0a07',
+    lights: [{ x: 0.7, y: 0.3, r: 0.5, color: '#d99a4e', op: 0.4 }, { x: 0.3, y: 0.7, r: 0.35, color: '#bd4422', op: 0.2 }], vignette: 0.55
+  }),
+  'galeria-02.svg': scene({ // terraza atardecer (apaisado, rosados)
+    w: 1400, h: 1000, id: 'g2', base: '#3a2418', base2: '#1a1c22',
+    lights: [{ x: 0.8, y: 0.7, r: 0.6, color: '#e8915a', op: 0.5 }, { x: 0.5, y: 0.3, r: 0.4, color: '#d98a86', op: 0.3 }], vignette: 0.5
+  }),
+  'galeria-03.svg': scene({ // producto, oliva/verde
+    w: 1000, h: 1000, id: 'g3', base: '#23271a', base2: '#0e110a',
+    lights: [{ x: 0.4, y: 0.4, r: 0.5, color: '#6f7d3e', op: 0.45 }, { x: 0.7, y: 0.7, r: 0.3, color: '#c2a35f', op: 0.3 }], vignette: 0.5
+  }),
+  'galeria-04.svg': scene({ // mesa puesta, crema cálida
+    w: 1000, h: 1000, id: 'g4', base: '#3a2e1f', base2: '#1c140c',
+    lights: [{ x: 0.5, y: 0.45, r: 0.55, color: '#e7cf9c', op: 0.45 }, { x: 0.25, y: 0.75, r: 0.3, color: '#bd7a3a', op: 0.25 }], vignette: 0.45
+  }),
+  'galeria-05.svg': scene({ // barra y vinos, rojo profundo (apaisado)
+    w: 1400, h: 1000, id: 'g5', base: '#2a1414', base2: '#100707',
+    lights: [{ x: 0.7, y: 0.4, r: 0.5, color: '#9c2b22', op: 0.45 }, { x: 0.3, y: 0.6, r: 0.35, color: '#d9a14e', op: 0.3 }], vignette: 0.55
+  }),
+  'galeria-06.svg': scene({ // brasa cocina (vertical, naranjas)
+    w: 1000, h: 1400, id: 'g6', base: '#1f1109', base2: '#0a0604',
+    lights: [{ x: 0.5, y: 0.7, r: 0.55, color: '#d4521b', op: 0.55 }, { x: 0.6, y: 0.4, r: 0.3, color: '#f0a23a', op: 0.35 }], vignette: 0.55
+  })
 };
 
 for (const [name, content] of Object.entries(files)) {
   writeFileSync(join(OUT, name), content, 'utf8');
   console.log('  ✓', name);
 }
-console.log(`\n${Object.keys(files).length} placeholders generados en public/assets/`);
+console.log(`\n${Object.keys(files).length} placeholders atmosféricos generados en public/assets/`);

@@ -1,31 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1200" viewBox="0 0 1000 1200" role="img" aria-label="A fuego lento">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500" role="img" aria-label="Sal Marina">
   <defs>
-    <linearGradient id="grad-sobre" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#1A1A18"/>
-      <stop offset="1" stop-color="#322B22"/>
+    <linearGradient id="base-brasa" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#1a0f09"/>
+      <stop offset="1" stop-color="#070504"/>
     </linearGradient>
-    <radialGradient id="glow-sobre" cx="0.7" cy="0.3" r="0.9">
-      <stop offset="0" stop-color="#6B7340" stop-opacity="0.55"/>
-      <stop offset="0.5" stop-color="#6B7340" stop-opacity="0.12"/>
-      <stop offset="1" stop-color="#6B7340" stop-opacity="0"/>
+    <radialGradient id="vig-brasa" cx="0.5" cy="0.42" r="0.75">
+      <stop offset="0.55" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.62"/>
     </radialGradient>
-    <filter id="soft-sobre"><feGaussianBlur stdDeviation="70"/></filter>
-    <filter id="noise-sobre">
-      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+    <filter id="blur-brasa"><feGaussianBlur stdDeviation="108"/></filter>
+    <filter id="grain-brasa">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
       <feColorMatrix type="saturate" values="0"/>
-      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
       <feComposite operator="over" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <rect width="1000" height="1200" fill="url(#grad-sobre)"/>
-  <circle cx="780" cy="336.00000000000006" r="320" fill="#6B7340" opacity="0.5" filter="url(#soft-sobre)"/>
-  <circle cx="200" cy="983.9999999999999" r="280" fill="#6B7340" opacity="0.28" filter="url(#soft-sobre)"/>
-  <circle cx="500" cy="600" r="220" fill="#C9A86A" opacity="0.18" filter="url(#soft-sobre)"/>
-  <rect width="1000" height="1200" fill="url(#glow-sobre)"/>
-  <rect width="1000" height="1200" filter="url(#noise-sobre)" opacity="0.7"/>
-  <rect x="40" y="48" width="920" height="1104" fill="none" stroke="#F5EFE6" stroke-opacity="0.18" stroke-width="2"/>
-  <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
-    <text x="500" y="523" font-family="Arial, Helvetica, sans-serif" font-size="32" letter-spacing="8" fill="#F5EFE6" fill-opacity="0.7">NUESTRA HISTORIA</text>
-    <text x="500" y="638.5" font-size="110" font-style="italic" fill="#F5EFE6">A fuego lento</text>
-  </g>
+  <rect width="1200" height="1500" fill="url(#base-brasa)"/>
+  <circle cx="600" cy="1380" r="720" fill="#d4521b" opacity="0.6" filter="url(#blur-brasa)"/>
+  <circle cx="420" cy="1200" r="360" fill="#f0a23a" opacity="0.45" filter="url(#blur-brasa)"/>
+  <circle cx="840" cy="1275" r="336.00000000000006" fill="#bd2f11" opacity="0.4" filter="url(#blur-brasa)"/>
+  <rect width="1200" height="1500" fill="url(#vig-brasa)"/>
+  <rect width="1200" height="1500" filter="url(#grain-brasa)" opacity="0.6"/>
 </svg>

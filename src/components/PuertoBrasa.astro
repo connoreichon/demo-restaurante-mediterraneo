@@ -1,0 +1,77 @@
+---
+import { site, citaDestacada } from '../data/site';
+import { asset } from '../lib/asset';
+const anios = site.anioActual - site.fundadoEn;
+---
+
+<section id="puerto" class="relative scroll-mt-24 overflow-hidden bg-tinta py-20 text-papel md:py-28">
+  <!-- Imagen a sangre por la derecha (desktop) -->
+  <img
+    src={asset('/assets/sobre-nosotros.svg')}
+    alt="La brasa de leña en la cocina de Sal Marina"
+    class="absolute right-0 top-0 hidden h-full w-[42%] object-cover md:block"
+    loading="lazy"
+  />
+  <div class="absolute right-0 top-0 hidden h-full w-[42%] bg-gradient-to-r from-tinta via-transparent to-transparent md:block"></div>
+
+  <div class="container-x relative">
+    <div class="md:max-w-[52%]">
+      <div class="reveal flex items-end gap-5">
+        <span class="sec-num text-7xl text-oro/30 md:text-8xl">II</span>
+        <div>
+          <p class="kicker text-oro">Nuestra casa</p>
+          <h2 class="display mt-2 text-4xl md:text-5xl">Del puerto a la brasa</h2>
+        </div>
+      </div>
+
+      <div class="reveal mt-8 space-y-5 text-papel/80">
+        <p>
+          Abrimos en {site.fundadoEn} un local pequeño frente al puerto. Desde entonces hacemos lo
+          mismo: bajar a la lonja cada mañana, elegir lo mejor que ha entrado y cocinarlo sin
+          artificios sobre brasa de leña.
+        </p>
+        <p>
+          Trabajamos con pescadores y huertas de la isla. No tenemos una carta fija porque el mar no
+          la tiene. Lo que sí mantenemos es la mesa sin prisa y la terraza para ver caer el sol.
+        </p>
+      </div>
+
+      <!-- Números como sellos (marginalia), no métricas de SaaS -->
+      <div class="reveal mt-10 flex flex-wrap gap-4">
+        <div class="sello h-24 w-24 rotate-[-6deg]">
+          <span><span class="font-display text-2xl not-italic">{anios}</span><br /><span class="kicker text-[0.5rem]">años abiertos</span></span>
+        </div>
+        <div class="sello h-24 w-24 rotate-[4deg]">
+          <span><span class="font-display text-xl not-italic leading-none">Lonja</span><br /><span class="kicker text-[0.5rem]">cada mañana</span></span>
+        </div>
+        <div class="sello h-24 w-24 rotate-[-3deg]">
+          <span><span class="font-display text-2xl not-italic">100%</span><br /><span class="kicker text-[0.5rem]">producto isla</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Imagen en móvil -->
+    <figure class="reveal mt-12 md:hidden">
+      <img
+        src={asset('/assets/sobre-nosotros.svg')}
+        alt="La brasa de leña en la cocina de Sal Marina"
+        class="aspect-[4/3] w-full object-cover"
+        loading="lazy"
+      />
+    </figure>
+
+    <!-- Cita editorial (pull-quote), solapando -->
+    <figure class="reveal relative mt-14 max-w-2xl md:mt-20">
+      <span class="absolute -left-2 -top-10 font-display text-8xl italic leading-none text-brasa/40">“</span>
+      <blockquote class="display text-3xl leading-tight md:text-4xl">
+        {citaDestacada.texto}
+      </blockquote>
+      <figcaption class="mt-5 flex items-center gap-3 text-papel/70">
+        <span class="text-oro">★ {citaDestacada.estrellas}</span>
+        <span class="h-px w-8 bg-papel/30"></span>
+        <span class="font-medium text-papel">{citaDestacada.autor}</span>
+        <span class="text-sm text-papel/50">· {citaDestacada.detalle}</span>
+      </figcaption>
+    </figure>
+  </div>
+</section>

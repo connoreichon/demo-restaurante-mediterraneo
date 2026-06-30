@@ -1,0 +1,75 @@
+---
+import { site } from '../data/site';
+import { asset } from '../lib/asset';
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
+// Art-dirección: resaltamos "brasa" en el titular sin dejar de leerlo de los datos.
+const palabras = site.titularHero.split(' ');
+---
+
+<section id="inicio" class="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-tinta text-papel">
+  <img
+    src={asset('/assets/hero-restaurante.svg')}
+    alt="Mesa frente al puerto al anochecer en Sal Marina"
+    class="absolute inset-0 h-full w-full object-cover"
+    fetchpriority="high"
+  />
+  <div class="absolute inset-0 bg-gradient-to-t from-tinta via-tinta/30 to-tinta/55"></div>
+
+  <!-- Etiqueta vertical (margen derecho) -->
+  <div class="pointer-events-none absolute right-5 top-1/2 hidden -translate-y-1/2 lg:block">
+    <p class="kicker rotate-90 whitespace-nowrap text-papel/45">Est. {site.fundadoEn} — Sal Marina</p>
+  </div>
+
+  <!-- Columna: masthead arriba, titular abajo (sin solaparse nunca) -->
+  <div class="container-x relative z-10 flex flex-1 flex-col">
+    <!-- Masthead editorial -->
+    <div class="reveal flex items-center gap-4 pt-28 md:pt-32">
+      <span class="hidden h-px flex-1 bg-papel/30 sm:block"></span>
+      <p class="kicker text-center text-papel/75">
+        Cocina de mercado · Frente al puerto · Palma de Mallorca
+      </p>
+      <span class="hidden h-px flex-1 bg-papel/30 sm:block"></span>
+    </div>
+
+    <div class="flex-1"></div>
+
+    <!-- Titular anclado abajo -->
+    <div class="max-w-5xl pb-10 md:pb-14">
+      <h1 class="reveal display text-[clamp(2.7rem,10vw,7.5rem)] leading-[0.92]">
+        {
+          palabras.map((p) =>
+            p.toLowerCase().replace(/[,.]/g, '') === 'brasa' ? (
+              <span class="italic text-brasa-400">{p} </span>
+            ) : (
+              <span>{p} </span>
+            )
+          )
+        }
+      </h1>
+
+      <div class="reveal mt-7 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <p class="max-w-md text-papel/80">{site.subtituloHero}</p>
+
+        <a
+          href="#reserva"
+          class="group inline-flex shrink-0 items-center gap-3 font-display text-2xl italic"
+        >
+          Reservar mesa
+          <span class="h-px w-8 bg-brasa-400 transition-all group-hover:w-12"></span>
+        </a>
+      </div>
+
+      <!-- Línea de datos clave (integrada, no badges) -->
+      <div class="reveal mt-9 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-papel/20 pt-5 text-sm text-papel/70">
+        <span>{site.direccion}</span>
+        <span class="text-papel/30">/</span>
+        <span class="text-oro">★ {site.rating} · {site.ratingFuente}</span>
+        <span class="text-papel/30">/</span>
+        <a href={waLink} target="_blank" rel="noopener" class="underline-offset-4 hover:text-papel hover:underline">
+          Reserva por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

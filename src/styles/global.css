@@ -1,71 +1,149 @@
 @import 'tailwindcss';
 
 /* ===========================================================================
-   Tokens de marca — Sal Marina (mediterráneo moderno)
-   Para reskins rápidos: cambia estos valores y la web entera se adapta.
+   Sal Marina — dirección "Carta editorial mediterránea × Lonja y brasa".
+   Reskin rápido: cambia estos tokens y la web entera se adapta.
    =========================================================================== */
 @theme {
-  --color-carbon: #1a1a18;
-  --color-carbon-700: #26241f;
-  --color-crema: #f5efe6;
-  --color-crema-200: #ece3d4;
-  --color-terracota: #c1440e;
-  --color-terracota-400: #e0683a;
-  --color-oliva: #6b7340;
-  --color-arena: #c9a86a;
+  /* Tinta y papel (cálidos, no negro/blanco puros) */
+  --color-tinta: #17130d;
+  --color-tinta-700: #2c2419;
+  --color-papel: #f3e9d8;
+  --color-papel-200: #ece0c9;
+  --color-papel-300: #e2d2b4;
 
-  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  /* Acentos */
+  --color-brasa: #bd4422; /* terracota / fuego */
+  --color-brasa-400: #d96a3f;
+  --color-oliva: #5f6b3a;
+  --color-oro: #b8924e; /* dorado / sellos */
+  --color-noche: #111b1f; /* azul-noche para el cierre (reserva) */
+  --color-noche-700: #1b2a30;
+
+  /* Compatibilidad con nombres antiguos por si quedan referencias */
+  --color-carbon: #17130d;
+  --color-crema: #f3e9d8;
+
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-
-  --shadow-soft: 0 18px 50px -20px rgb(26 26 24 / 0.45);
+  --font-hand: 'Caveat', 'Segoe Script', cursive;
 }
 
-/* Las tipografías (Cormorant Garamond + Inter, licencia abierta) se cargan
-   con <link> en src/layouts/Base.astro para mejor rendimiento. */
+/* Fuentes con <link> en Base.astro. */
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-crema);
-  color: var(--color-carbon);
+  background-color: var(--color-papel);
+  color: var(--color-tinta);
+  /* Textura de papel muy sutil: dos veladuras cálidas */
+  background-image:
+    radial-gradient(120% 80% at 80% -10%, rgba(184, 146, 78, 0.1), transparent 60%),
+    radial-gradient(90% 70% at 0% 100%, rgba(95, 107, 58, 0.08), transparent 55%);
+  background-attachment: fixed;
 }
 
-/* Contenedor central reutilizable */
+/* Contenedor editorial (algo más ancho, para composición a sangre controlada) */
 .container-x {
   width: 100%;
-  max-width: 76rem;
+  max-width: 80rem;
   margin-inline: auto;
-  padding-inline: 1.25rem;
+  padding-inline: 1.5rem;
 }
-
 @media (min-width: 768px) {
   .container-x {
-    padding-inline: 2rem;
+    padding-inline: 2.5rem;
   }
 }
 
-/* Animación sutil de entrada al hacer scroll */
+/* --- Elementos editoriales reutilizables --------------------------------- */
+
+/* Etiqueta pequeña en versales espaciadas */
+.kicker {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+/* Numeración romana de sección (marginal, grande, tenue) */
+.sec-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+}
+
+/* Línea fina de carta */
+.hairline {
+  height: 1px;
+  background: currentColor;
+  opacity: 0.22;
+}
+
+/* Nota manuscrita del chef */
+.nota {
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+/* Línea de carta: nombre ......... precio (líder de puntos) */
+.leader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  width: 100%;
+}
+.leader__fill {
+  flex: 1;
+  border-bottom: 1.5px dotted currentColor;
+  opacity: 0.35;
+  transform: translateY(-0.25rem);
+}
+
+/* Sello / etiqueta circular (marginalia, no "stat de SaaS") */
+.sello {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border: 1.5px solid var(--color-oro);
+  color: var(--color-oro);
+  border-radius: 9999px;
+  aspect-ratio: 1;
+  line-height: 1.05;
+}
+
+/* Titular display fluido y dramático */
+.display {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+/* Animación de entrada al hacer scroll */
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 .reveal {
   opacity: 0;
 }
-
 .reveal.is-visible {
-  animation: rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

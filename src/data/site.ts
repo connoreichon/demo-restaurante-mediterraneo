@@ -54,61 +54,81 @@ export const site = {
   anioActual: new Date().getFullYear()
 };
 
-// --- Especialidades ---------------------------------------------------------
-export const especialidades = [
-  {
-    nombre: 'Pescado del día a la brasa',
-    descripcion: 'Lo que llega esa mañana de la lonja, a la brasa de leña y aceite de oliva.',
-    imagen: '/assets/plato-pescado-brasa.svg'
-  },
-  {
-    nombre: 'Arroz de marisco',
-    descripcion: 'A fuego lento en paellera, con fumet de la casa. Mínimo dos personas.',
-    imagen: '/assets/plato-arroz-marisco.svg'
-  },
-  {
-    nombre: 'Verduras de temporada',
-    descripcion: 'De huertas de la isla, a la brasa o escabechadas. La carta cambia cada mes.',
-    imagen: '/assets/plato-verduras-temporada.svg'
-  },
-  {
-    nombre: 'Postres caseros',
-    descripcion: 'Hechos cada día en casa. Pregunta por el postre del chef.',
-    imagen: '/assets/plato-postre-casero.svg'
-  }
-];
+// --- Hoy en la mesa (carta, no "cards") -------------------------------------
+// `precio`: usa 's/m' (según mercado) para dar sensación de carta real.
+// `nota`: nota manuscrita del chef (se muestra en tipografía a mano).
+export const carta = {
+  nota: 'La carta cambia cada mañana, según lo que entra de la lonja y la huerta.',
+  platos: [
+    {
+      nombre: 'Pescado del día a la brasa',
+      descripcion: 'Lo que llega esa mañana de la lonja, a la brasa de leña con aceite de oliva de la isla.',
+      precio: 's/m',
+      nota: 'Pregunta qué ha entrado hoy',
+      imagen: '/assets/plato-pescado-brasa.svg'
+    },
+    {
+      nombre: 'Arroz de marisco a fuego lento',
+      descripcion: 'En paellera, con fumet de la casa reducido durante horas. Para dos.',
+      precio: '24',
+      nota: 'Nuestro plato más pedido',
+      imagen: '/assets/plato-arroz-marisco.svg'
+    },
+    {
+      nombre: 'Verduras de la huerta a la brasa',
+      descripcion: 'De huertas de la isla, a la brasa o en escabeche suave. Cambia cada mes.',
+      precio: '14',
+      nota: '',
+      imagen: '/assets/plato-verduras-temporada.svg'
+    },
+    {
+      nombre: 'Postre del chef, hecho en casa',
+      descripcion: 'Lo que apetezca esa semana. Pregunta a tu camarero por el de hoy.',
+      precio: '7',
+      nota: 'Distinto cada semana',
+      imagen: '/assets/plato-postre-casero.svg'
+    }
+  ]
+};
 
-// --- Galería ----------------------------------------------------------------
+// Compatibilidad: especialidades como lista simple (por si se reutiliza)
+export const especialidades = carta.platos;
+
+// --- Galería editorial (tamaños variados para composición asimétrica) -------
+// `tam`: 'feature' (grande), 'tall' (vertical), 'wide' (apaisada), 'normal'.
 export const galeria = [
-  { src: '/assets/galeria-01.svg', alt: 'Ambiente de la sala', alto: true },
-  { src: '/assets/galeria-02.svg', alt: 'Terraza al atardecer' },
-  { src: '/assets/galeria-03.svg', alt: 'Producto de temporada' },
-  { src: '/assets/galeria-04.svg', alt: 'Mesa puesta' },
-  { src: '/assets/galeria-05.svg', alt: 'Barra y selección de vinos' },
-  { src: '/assets/galeria-06.svg', alt: 'Cocina a la brasa', alto: true }
+  { src: '/assets/galeria-02.svg', alt: 'La terraza al atardecer', tam: 'feature', cap: 'La terraza, al caer el sol' },
+  { src: '/assets/galeria-06.svg', alt: 'La brasa en la cocina', tam: 'tall', cap: 'El fuego, siempre encendido' },
+  { src: '/assets/galeria-03.svg', alt: 'Producto de temporada', tam: 'normal', cap: 'Lo de hoy' },
+  { src: '/assets/galeria-04.svg', alt: 'Mesa puesta', tam: 'normal', cap: 'Mesa sin prisa' },
+  { src: '/assets/galeria-01.svg', alt: 'Ambiente de la sala', tam: 'tall', cap: 'La sala' },
+  { src: '/assets/galeria-05.svg', alt: 'Barra y selección de vinos', tam: 'wide', cap: 'La barra y los vinos de la isla' }
 ];
 
 // --- Opiniones (ficticias realistas para la demo) ---------------------------
 export const opiniones = [
   {
     texto:
-      'El mejor arroz de marisco que he comido en la isla. Pedimos mesa en la terraza al atardecer y fue redondo. Repetiremos seguro.',
+      'El mejor arroz de marisco que he comido en la isla. Pedimos mesa en la terraza al atardecer y fue redondo.',
     autor: 'Marta Gil',
     detalle: 'Cena de aniversario',
     estrellas: 5
   },
   {
     texto:
-      'Pescado fresquísimo y trato cercano. Te explican lo que ha entrado ese día y te aconsejan sin prisa. Se nota el producto.',
+      'Pescado fresquísimo y trato cercano. Te explican lo que ha entrado ese día y te aconsejan sin prisa.',
     autor: 'Andreas Köhler',
     detalle: 'Comida en pareja',
     estrellas: 5
   },
   {
     texto:
-      'Fuimos un grupo de 8 y todo perfecto: nos adaptaron el menú, salió rápido y el postre del chef fue la sorpresa de la noche.',
+      'Nos adaptaron el menú para un grupo de 8, salió rápido y el postre del chef fue la sorpresa de la noche.',
     autor: 'Lucía Fernández',
     detalle: 'Comida de empresa',
     estrellas: 5
   }
 ];
+
+// Cita destacada (pull-quote editorial, en vez de un grid de testimonios)
+export const citaDestacada = opiniones[0];

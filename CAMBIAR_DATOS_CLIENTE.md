@@ -25,23 +25,26 @@ Es el archivo **más importante**. Casi todo sale de aquí. Cambia:
 | `redes` | Enlaces a Instagram / Facebook / reservas. |
 | `rating`, `ratingFuente` | Valoración (ej. "4,8" · "Google · 320+ reseñas"). |
 | `razonSocial` | Para el aviso legal del footer. |
-| `especialidades[]` | Platos/servicios: nombre, descripción e imagen. |
-| `galeria[]` | Imágenes de la galería (`alto: true` = ocupa doble alto). |
-| `opiniones[]` | Testimonios reales del cliente (texto, autor, detalle, estrellas). |
+| `carta.nota` | Nota manuscrita bajo el título de la carta. |
+| `carta.platos[]` | Carta: `nombre`, `descripcion`, `precio` (usa `'s/m'` para "según mercado"), `nota` (nota del chef, manuscrita), `imagen`. |
+| `galeria[]` | Imágenes: `src`, `alt`, `cap` (pie de foto) y `tam` (`feature`/`tall`/`wide`/`normal`, controla el tamaño en el masonry). |
+| `opiniones[]` | Testimonios (texto, autor, detalle, estrellas). |
+| `citaDestacada` | Cita grande de la sección "El puerto" (por defecto, la primera opinión). |
 
 > Cambiar el texto aquí actualiza **toda** la web (hero, secciones, footer, SEO, WhatsApp).
 
 ## 2. Colores y tipografía → `src/styles/global.css`
 En el bloque `@theme` cambia los colores de marca:
 ```css
---color-terracota: #C1440E;   /* color principal / CTA */
---color-oliva:     #6B7340;   /* color secundario */
---color-arena:     #C9A86A;   /* dorado / acentos */
---color-carbon:    #1A1A18;   /* fondos oscuros */
---color-crema:     #F5EFE6;   /* fondos claros */
+--color-tinta:  #17130d;   /* texto / fondos oscuros */
+--color-papel:  #f3e9d8;   /* fondo claro (papel) */
+--color-brasa:  #bd4422;   /* acento principal / CTA */
+--color-oliva:  #5f6b3a;   /* notas del chef / secundario */
+--color-oro:    #b8924e;   /* sellos / detalles */
+--color-noche:  #111b1f;   /* sección de reserva (cierre) */
 ```
-Para cambiar las tipografías: edita `--font-display` y `--font-body`, y actualiza
-el `<link>` de Google Fonts en `src/layouts/Base.astro`.
+Para cambiar las tipografías: edita `--font-display`, `--font-body` y `--font-hand`
+(notas manuscritas), y actualiza el `<link>` de Google Fonts en `src/layouts/Base.astro`.
 
 > Consulta `DESIGN_SYSTEM.md` para paletas recomendadas por tipo de negocio.
 

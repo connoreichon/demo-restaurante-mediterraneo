@@ -1,0 +1,59 @@
+---
+import { galeria } from '../data/site';
+import { asset } from '../lib/asset';
+
+const feature = galeria[0];
+const resto = galeria.slice(1);
+const aspecto: Record<string, string> = {
+  tall: 'aspect-[2/3]',
+  wide: 'aspect-[5/4]',
+  normal: 'aspect-square'
+};
+---
+
+<section id="galeria" class="scroll-mt-24 py-20 md:py-28">
+  <div class="container-x">
+    <header class="reveal mb-12 flex items-end justify-between gap-6 md:mb-16">
+      <div class="flex items-end gap-5">
+        <span class="sec-num text-7xl text-brasa/30 md:text-8xl">III</span>
+        <div>
+          <p class="kicker text-brasa">La casa</p>
+          <h2 class="display mt-2 text-5xl md:text-6xl">La sala, la terraza, el fuego</h2>
+        </div>
+      </div>
+      <p class="nota hidden max-w-[12rem] text-oliva md:block">Un sitio para quedarse hasta que cierren.</p>
+    </header>
+
+    <!-- Foto destacada a lo ancho -->
+    <figure class="reveal group relative overflow-hidden">
+      <img
+        src={asset(feature.src)}
+        alt={feature.alt}
+        class="aspect-[16/8] w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105"
+        loading="lazy"
+      />
+      <figcaption class="absolute bottom-4 left-4 font-display text-lg italic text-papel drop-shadow">
+        {feature.cap}
+      </figcaption>
+    </figure>
+
+    <!-- Masonry asimétrico -->
+    <div class="mt-5 gap-5 [column-fill:_balance] sm:columns-2 lg:columns-3">
+      {
+        resto.map((g) => (
+          <figure class="reveal group mb-5 break-inside-avoid">
+            <div class="overflow-hidden">
+              <img
+                src={asset(g.src)}
+                alt={g.alt}
+                class:list={['w-full object-cover transition-transform duration-[1.2s] group-hover:scale-105', aspecto[g.tam] ?? 'aspect-square']}
+                loading="lazy"
+              />
+            </div>
+            <figcaption class="mt-2 font-display text-base italic text-tinta/60">{g.cap}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -3,89 +3,97 @@ import { site } from '../data/site';
 
 const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
 const nav = [
-  { label: 'Especialidades', href: '#especialidades' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Nosotros', href: '#nosotros' },
-  { label: 'Opiniones', href: '#opiniones' },
-  { label: 'Horario', href: '#horario' },
-  { label: 'Contacto', href: '#contacto' }
+  { label: 'La carta', href: '#carta' },
+  { label: 'El puerto', href: '#puerto' },
+  { label: 'La casa', href: '#galeria' },
+  { label: 'Reservar', href: '#reserva' }
 ];
 ---
 
 <header
   id="site-header"
-  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+  class="fixed inset-x-0 top-0 z-50 text-papel transition-colors duration-500"
   data-header
 >
-  <div class="container-x flex items-center justify-between py-4">
-    <a href="#inicio" class="font-display text-2xl italic tracking-tight text-crema" data-logo>
-      {site.nombre}
+  <div class="container-x flex items-center justify-between py-5">
+    <a href="#inicio" class="font-display text-[1.6rem] italic leading-none tracking-tight" data-brand>
+      Sal Marina
     </a>
 
-    <nav class="hidden items-center gap-7 lg:flex" aria-label="Principal">
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Principal">
       {
-        nav.map((item) => (
-          <a
-            href={item.href}
-            class="text-sm font-medium text-crema/85 transition-colors hover:text-arena"
-            data-navlink
-          >
+        nav.slice(0, 3).map((item, i) => (
+          <a href={item.href} class="kicker transition-opacity hover:opacity-60" data-navlink>
+            <span class="mr-2 opacity-50">0{i + 1}</span>
             {item.label}
           </a>
         ))
       }
       <a
-        href={waLink}
-        target="_blank"
-        rel="noopener"
-        class="rounded-full bg-terracota px-5 py-2 text-sm font-semibold text-crema shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-terracota-400"
+        href="#reserva"
+        class="group inline-flex items-center gap-2 text-sm font-medium"
+        data-navlink
       >
-        Reservar mesa
+        <span class="font-display text-lg italic">Reservar</span>
+        <span class="h-px w-6 bg-current transition-all group-hover:w-9"></span>
       </a>
     </nav>
 
     <!-- Botón móvil -->
     <button
       type="button"
-      class="grid h-11 w-11 place-items-center rounded-full text-crema lg:hidden"
+      class="flex h-10 w-10 items-center justify-center md:hidden"
       aria-label="Abrir menú"
       aria-expanded="false"
       data-menu-toggle
     >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <line x1="3" y1="7" x2="21" y2="7"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="17" x2="21" y2="17"></line>
+      <span class="sr-only">Menú</span>
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.4">
+        <line x1="3" y1="9" x2="23" y2="9"></line>
+        <line x1="3" y1="17" x2="23" y2="17"></line>
       </svg>
     </button>
   </div>
 
-  <!-- Menú móvil -->
+  <!-- Menú móvil (pantalla papel) -->
   <div
-    class="hidden border-t border-crema/10 bg-carbon/95 backdrop-blur lg:!hidden"
+    class="fixed inset-0 z-40 hidden bg-papel text-tinta md:!hidden"
     data-menu-panel
   >
-    <nav class="container-x flex flex-col gap-1 py-4" aria-label="Móvil">
-      {
-        nav.map((item) => (
-          <a
-            href={item.href}
-            class="rounded-lg px-3 py-3 text-base text-crema/90 hover:bg-crema/5"
-            data-menu-link
-          >
-            {item.label}
-          </a>
-        ))
-      }
+    <div class="container-x flex h-full flex-col">
+      <div class="flex items-center justify-between py-5">
+        <span class="font-display text-2xl italic">Sal Marina</span>
+        <button type="button" class="flex h-10 w-10 items-center justify-center" aria-label="Cerrar menú" data-menu-close>
+          <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.4">
+            <line x1="6" y1="6" x2="20" y2="20"></line>
+            <line x1="20" y1="6" x2="6" y2="20"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="mt-6 flex flex-col gap-1" aria-label="Móvil">
+        {
+          nav.map((item, i) => (
+            <a
+              href={item.href}
+              class="flex items-baseline gap-4 border-b border-tinta/10 py-5 font-display text-4xl italic"
+              data-menu-link
+            >
+              <span class="kicker not-italic text-oro">0{i + 1}</span>
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
       <a
         href={waLink}
         target="_blank"
         rel="noopener"
-        class="mt-2 rounded-full bg-terracota px-5 py-3 text-center text-base font-semibold text-crema"
+        class="mt-auto mb-8 flex items-center justify-center gap-3 bg-brasa py-4 text-papel"
+        data-menu-link
       >
-        Reservar por WhatsApp
+        <span class="kicker">Reservar por WhatsApp</span>
       </a>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -93,27 +101,33 @@ const nav = [
   const header = document.querySelector('[data-header]') as HTMLElement | null;
   const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
   const panel = document.querySelector('[data-menu-panel]') as HTMLElement | null;
+  const closeBtn = document.querySelector('[data-menu-close]') as HTMLButtonElement | null;
 
-  // Fondo sólido al hacer scroll
+  // Cambia a "tinta sobre papel" al salir de la portada
   const onScroll = () => {
     if (!header) return;
-    if (window.scrollY > 24) {
-      header.classList.add('bg-carbon/95', 'backdrop-blur', 'shadow-soft');
-    } else {
-      header.classList.remove('bg-carbon/95', 'backdrop-blur', 'shadow-soft');
-    }
+    const solid = window.scrollY > window.innerHeight * 0.85;
+    header.classList.toggle('text-tinta', solid);
+    header.classList.toggle('text-papel', !solid);
+    header.classList.toggle('bg-papel/95', solid);
+    header.classList.toggle('backdrop-blur', solid);
+    header.classList.toggle('border-b', solid);
+    header.classList.toggle('border-tinta/10', solid);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Menú móvil
-  const closeMenu = () => {
+  const open = () => {
+    panel?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    toggle?.setAttribute('aria-expanded', 'true');
+  };
+  const close = () => {
     panel?.classList.add('hidden');
+    document.body.style.overflow = '';
     toggle?.setAttribute('aria-expanded', 'false');
   };
-  toggle?.addEventListener('click', () => {
-    const open = panel?.classList.toggle('hidden') === false;
-    toggle.setAttribute('aria-expanded', String(open));
-  });
-  document.querySelectorAll('[data-menu-link]').forEach((l) => l.addEventListener('click', closeMenu));
+  toggle?.addEventListener('click', open);
+  closeBtn?.addEventListener('click', close);
+  document.querySelectorAll('[data-menu-link]').forEach((l) => l.addEventListener('click', close));
 </script>
