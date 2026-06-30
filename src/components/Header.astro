@@ -1,0 +1,119 @@
+---
+import { site } from '../data/site';
+
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
+const nav = [
+  { label: 'Especialidades', href: '#especialidades' },
+  { label: 'Galería', href: '#galeria' },
+  { label: 'Nosotros', href: '#nosotros' },
+  { label: 'Opiniones', href: '#opiniones' },
+  { label: 'Horario', href: '#horario' },
+  { label: 'Contacto', href: '#contacto' }
+];
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+  data-header
+>
+  <div class="container-x flex items-center justify-between py-4">
+    <a href="#inicio" class="font-display text-2xl italic tracking-tight text-crema" data-logo>
+      {site.nombre}
+    </a>
+
+    <nav class="hidden items-center gap-7 lg:flex" aria-label="Principal">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="text-sm font-medium text-crema/85 transition-colors hover:text-arena"
+            data-navlink
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={waLink}
+        target="_blank"
+        rel="noopener"
+        class="rounded-full bg-terracota px-5 py-2 text-sm font-semibold text-crema shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-terracota-400"
+      >
+        Reservar mesa
+      </a>
+    </nav>
+
+    <!-- Botón móvil -->
+    <button
+      type="button"
+      class="grid h-11 w-11 place-items-center rounded-full text-crema lg:hidden"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      data-menu-toggle
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <line x1="3" y1="7" x2="21" y2="7"></line>
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="17" x2="21" y2="17"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menú móvil -->
+  <div
+    class="hidden border-t border-crema/10 bg-carbon/95 backdrop-blur lg:!hidden"
+    data-menu-panel
+  >
+    <nav class="container-x flex flex-col gap-1 py-4" aria-label="Móvil">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-lg px-3 py-3 text-base text-crema/90 hover:bg-crema/5"
+            data-menu-link
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={waLink}
+        target="_blank"
+        rel="noopener"
+        class="mt-2 rounded-full bg-terracota px-5 py-3 text-center text-base font-semibold text-crema"
+      >
+        Reservar por WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('[data-header]') as HTMLElement | null;
+  const toggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
+  const panel = document.querySelector('[data-menu-panel]') as HTMLElement | null;
+
+  // Fondo sólido al hacer scroll
+  const onScroll = () => {
+    if (!header) return;
+    if (window.scrollY > 24) {
+      header.classList.add('bg-carbon/95', 'backdrop-blur', 'shadow-soft');
+    } else {
+      header.classList.remove('bg-carbon/95', 'backdrop-blur', 'shadow-soft');
+    }
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Menú móvil
+  const closeMenu = () => {
+    panel?.classList.add('hidden');
+    toggle?.setAttribute('aria-expanded', 'false');
+  };
+  toggle?.addEventListener('click', () => {
+    const open = panel?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  document.querySelectorAll('[data-menu-link]').forEach((l) => l.addEventListener('click', closeMenu));
+</script>

@@ -1,0 +1,50 @@
+---
+import { site } from '../data/site';
+const anios = site.anioActual - site.fundadoEn;
+---
+
+<section id="nosotros" class="bg-carbon py-20 text-crema md:py-28">
+  <div class="container-x grid items-center gap-12 md:grid-cols-2">
+    <div class="reveal order-2 md:order-1">
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-arena">Nuestra casa</p>
+      <h2 class="font-display text-4xl text-crema md:text-5xl">
+        {anios} años cocinando el Mediterráneo
+      </h2>
+      <div class="mt-6 space-y-4 text-crema/80">
+        <p>
+          Sal Marina nació en {site.fundadoEn} como un pequeño local frente al puerto. Desde entonces
+          mantenemos lo mismo: comprar el mejor producto del día, cocinarlo sin artificios y servirlo
+          en una mesa donde no haya prisa.
+        </p>
+        <p>
+          Trabajamos con pescadores y huertas de la isla. La brasa de leña es el corazón de la cocina,
+          y cada arroz se hace al momento. Lo demás lo pone la terraza y un buen atardecer.
+        </p>
+      </div>
+
+      <dl class="mt-8 grid grid-cols-3 gap-4 border-t border-crema/15 pt-6">
+        <div>
+          <dt class="font-display text-3xl text-arena">{anios}+</dt>
+          <dd class="text-xs uppercase tracking-wide text-crema/60">Años abiertos</dd>
+        </div>
+        <div>
+          <dt class="font-display text-3xl text-arena">100%</dt>
+          <dd class="text-xs uppercase tracking-wide text-crema/60">Producto local</dd>
+        </div>
+        <div>
+          <dt class="font-display text-3xl text-arena">{site.rating}</dt>
+          <dd class="text-xs uppercase tracking-wide text-crema/60">Valoración media</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="reveal order-1 md:order-2">
+      <img
+        src="/assets/sobre-nosotros.svg"
+        alt="La cocina de Sal Marina"
+        loading="lazy"
+        class="aspect-[5/6] w-full rounded-2xl object-cover shadow-soft"
+      />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900" role="img" aria-label="Arroz de marisco">
+  <defs>
+    <linearGradient id="grad-d2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1A1A18"/>
+      <stop offset="1" stop-color="#26241F"/>
+    </linearGradient>
+    <radialGradient id="glow-d2" cx="0.7" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#C9A86A" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#C9A86A" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#C9A86A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft-d2"><feGaussianBlur stdDeviation="63"/></filter>
+    <filter id="noise-d2">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="900" height="900" fill="url(#grad-d2)"/>
+  <circle cx="702" cy="252.00000000000003" r="288" fill="#C9A86A" opacity="0.5" filter="url(#soft-d2)"/>
+  <circle cx="180" cy="738" r="252.00000000000003" fill="#6B7340" opacity="0.28" filter="url(#soft-d2)"/>
+  <circle cx="450" cy="450" r="198" fill="#C9A86A" opacity="0.18" filter="url(#soft-d2)"/>
+  <rect width="900" height="900" fill="url(#glow-d2)"/>
+  <rect width="900" height="900" filter="url(#noise-d2)" opacity="0.7"/>
+  <rect x="36" y="36" width="828" height="828" fill="none" stroke="#F5EFE6" stroke-opacity="0.18" stroke-width="1"/>
+  <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
+    <text x="450" y="396.1" font-family="Arial, Helvetica, sans-serif" font-size="29" letter-spacing="7.25" fill="#F5EFE6" fill-opacity="0.7">EN PAELLERA</text>
+    <text x="450" y="476.95" font-size="77" font-style="italic" fill="#F5EFE6">Arroz de marisco</text>
+  </g>
+</svg>

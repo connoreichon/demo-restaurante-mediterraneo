@@ -1,0 +1,68 @@
+---
+import { site } from '../data/site';
+const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
+---
+
+<section id="inicio" class="relative min-h-[100svh] w-full overflow-hidden">
+  <!-- Imagen de fondo (placeholder: /assets/hero-restaurante.svg) -->
+  <img
+    src="/assets/hero-restaurante.svg"
+    alt="Interior del restaurante Sal Marina"
+    class="absolute inset-0 h-full w-full object-cover"
+    fetchpriority="high"
+  />
+  <div class="absolute inset-0 bg-gradient-to-b from-carbon/70 via-carbon/45 to-carbon/85"></div>
+
+  <div class="container-x relative flex min-h-[100svh] flex-col justify-center pt-24 pb-16">
+    <p class="reveal mb-5 flex items-center gap-3 text-sm font-medium uppercase tracking-[0.25em] text-arena">
+      <span class="h-px w-10 bg-arena"></span>
+      Desde {site.fundadoEn} · {site.ciudad.split(' ').slice(1).join(' ')}
+    </p>
+
+    <h1 class="reveal max-w-3xl font-display text-5xl leading-[1.05] text-crema sm:text-6xl md:text-7xl">
+      {site.titularHero}
+    </h1>
+
+    <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-crema/85">
+      {site.subtituloHero}
+    </p>
+
+    <div class="reveal mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+      <a
+        href={waLink}
+        target="_blank"
+        rel="noopener"
+        class="rounded-full bg-terracota px-7 py-3.5 text-center text-base font-semibold text-crema shadow-soft transition-transform hover:-translate-y-0.5 hover:bg-terracota-400"
+      >
+        Reservar mesa
+      </a>
+      <a
+        href="#especialidades"
+        class="rounded-full border border-crema/40 px-7 py-3.5 text-center text-base font-medium text-crema transition-colors hover:bg-crema/10"
+      >
+        Ver la carta
+      </a>
+    </div>
+
+    <!-- Prueba social -->
+    <div class="reveal mt-12 flex items-center gap-4 text-crema/90">
+      <div class="flex" aria-hidden="true">
+        {Array.from({ length: 5 }).map(() => (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#C9A86A">
+            <path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z" />
+          </svg>
+        ))}
+      </div>
+      <p class="text-sm">
+        <span class="font-semibold text-crema">{site.rating}</span> · {site.ratingFuente}
+      </p>
+    </div>
+  </div>
+
+  <!-- Indicador scroll -->
+  <div class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-crema/60 md:block">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M6 13l6 6 6-6" />
+    </svg>
+  </div>
+</section>

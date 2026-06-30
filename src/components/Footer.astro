@@ -1,0 +1,42 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="bg-carbon-700 py-12 text-crema/70">
+  <div class="container-x grid gap-8 md:grid-cols-3">
+    <div>
+      <p class="font-display text-2xl italic text-crema">{site.nombre}</p>
+      <p class="mt-2 text-sm">{site.reclamo} · desde {site.fundadoEn}</p>
+    </div>
+
+    <div class="text-sm">
+      <p class="mb-2 font-semibold uppercase tracking-wide text-crema/50">Contacto</p>
+      <p>{site.direccion}, {site.ciudad}</p>
+      <p>
+        <a href={`tel:${site.telefono.replace(/\s/g, '')}`} class="hover:text-arena">{site.telefono}</a>
+      </p>
+      <p><a href={`mailto:${site.email}`} class="hover:text-arena">{site.email}</a></p>
+    </div>
+
+    <div class="text-sm">
+      <p class="mb-2 font-semibold uppercase tracking-wide text-crema/50">Síguenos</p>
+      <div class="flex gap-4">
+        <a href={site.redes.instagram} target="_blank" rel="noopener" class="hover:text-arena">Instagram</a>
+        <a href={site.redes.facebook} target="_blank" rel="noopener" class="hover:text-arena">Facebook</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-x mt-10 flex flex-col gap-2 border-t border-crema/10 pt-6 text-xs text-crema/40 sm:flex-row sm:items-center sm:justify-between">
+    <p>© {site.anioActual} {site.razonSocial}. Todos los derechos reservados.</p>
+    <p class="flex gap-4">
+      <a href="#" class="hover:text-crema/70">Aviso legal</a>
+      <a href="#" class="hover:text-crema/70">Privacidad</a>
+      <a href="#" class="hover:text-crema/70">Cookies</a>
+    </p>
+  </div>
+
+  <p class="container-x mt-4 text-[11px] text-crema/30">
+    Web de demostración · diseño de muestra para portfolio. Datos, fotos y textos ficticios.
+  </p>
+</footer>

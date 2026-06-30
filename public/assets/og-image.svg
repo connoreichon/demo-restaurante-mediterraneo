@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Sal Marina">
+  <defs>
+    <linearGradient id="grad-og" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15140F"/>
+      <stop offset="1" stop-color="#2A2118"/>
+    </linearGradient>
+    <radialGradient id="glow-og" cx="0.7" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#C1440E" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#C1440E" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#C1440E" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft-og"><feGaussianBlur stdDeviation="44"/></filter>
+    <filter id="noise-og">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grad-og)"/>
+  <circle cx="936" cy="176.4" r="201.6" fill="#C1440E" opacity="0.5" filter="url(#soft-og)"/>
+  <circle cx="240" cy="516.6" r="176.4" fill="#6B7340" opacity="0.28" filter="url(#soft-og)"/>
+  <circle cx="600" cy="315" r="138.6" fill="#C9A86A" opacity="0.18" filter="url(#soft-og)"/>
+  <rect width="1200" height="630" fill="url(#glow-og)"/>
+  <rect width="1200" height="630" filter="url(#noise-og)" opacity="0.7"/>
+  <rect x="48" y="25.2" width="1104" height="579.6" fill="none" stroke="#F5EFE6" stroke-opacity="0.18" stroke-width="2"/>
+  <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
+    <text x="600" y="266.7" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="5" fill="#F5EFE6" fill-opacity="0.7">COCINA MEDITERRANEA</text>
+    <text x="600" y="339.15" font-size="69" font-style="italic" fill="#F5EFE6">Sal Marina</text>
+  </g>
+</svg>

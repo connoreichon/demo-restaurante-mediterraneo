@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800" role="img" aria-label="Vinos">
+  <defs>
+    <linearGradient id="grad-g5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1A1A18"/>
+      <stop offset="1" stop-color="#26241F"/>
+    </linearGradient>
+    <radialGradient id="glow-g5" cx="0.7" cy="0.3" r="0.9">
+      <stop offset="0" stop-color="#C9A86A" stop-opacity="0.55"/>
+      <stop offset="0.5" stop-color="#C9A86A" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#C9A86A" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft-g5"><feGaussianBlur stdDeviation="56"/></filter>
+    <filter id="noise-g5">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+      <feComposite operator="over" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="1100" height="800" fill="url(#grad-g5)"/>
+  <circle cx="858" cy="224.00000000000003" r="256" fill="#C9A86A" opacity="0.5" filter="url(#soft-g5)"/>
+  <circle cx="220" cy="656" r="224.00000000000003" fill="#6B7340" opacity="0.28" filter="url(#soft-g5)"/>
+  <circle cx="550" cy="400" r="176" fill="#C9A86A" opacity="0.18" filter="url(#soft-g5)"/>
+  <rect width="1100" height="800" fill="url(#glow-g5)"/>
+  <rect width="1100" height="800" filter="url(#noise-g5)" opacity="0.7"/>
+  <rect x="44" y="32" width="1012" height="736" fill="none" stroke="#F5EFE6" stroke-opacity="0.18" stroke-width="2"/>
+  <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
+    <text x="550" y="338.4" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="6.5" fill="#F5EFE6" fill-opacity="0.7">BARRA</text>
+    <text x="550" y="430.8" font-size="88" font-style="italic" fill="#F5EFE6">Vinos</text>
+  </g>
+</svg>
