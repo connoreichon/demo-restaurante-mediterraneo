@@ -4,23 +4,18 @@ import { asset } from '../lib/asset';
 ---
 
 <section id="puerto" class="relative scroll-mt-24 overflow-hidden bg-tinta py-20 text-papel md:py-28">
-  <!-- Imagen a sangre por la derecha (desktop) -->
-  <img
-    src={asset('/assets/img/puerto-brasa-fuego.jpg')}
-    alt="Pulpo a la brasa en la cocina de Sal Marina"
-    class="absolute right-0 top-0 hidden h-full w-[42%] object-cover md:block"
-    loading="lazy"
-  />
-  <!-- Fuego REAL en movimiento: vídeo de llamas superpuesto (screen) sobre la foto -->
+  <!-- Vídeo en bucle: parrilla a la brasa (la llama se mueve sola). Desktop a sangre. -->
   <video
-    class="pointer-events-none absolute right-0 top-0 hidden h-[64%] w-[42%] object-cover mix-blend-screen md:block"
+    class="absolute right-0 top-0 hidden h-full w-[42%] object-cover md:block"
     autoplay
     muted
     loop
     playsinline
-    aria-hidden="true"
+    preload="metadata"
+    poster={asset('/assets/img/puerto-brasa-fuego.jpg')}
+    aria-label="Parrilla a la brasa en Sal Marina"
   >
-    <source src={asset('/assets/img/fuego-loop.mp4')} type="video/mp4" />
+    <source src={asset('/assets/img/brasa-loop.mp4')} type="video/mp4" />
   </video>
   <div class="absolute right-0 top-0 hidden h-full w-[42%] bg-gradient-to-r from-tinta via-transparent to-transparent md:block"></div>
 
@@ -60,23 +55,19 @@ import { asset } from '../lib/asset';
       </div>
     </div>
 
-    <!-- Imagen en móvil (con vídeo de fuego real superpuesto) -->
-    <figure class="reveal relative mt-12 overflow-hidden md:hidden">
-      <img
-        src={asset('/assets/img/puerto-brasa-fuego.jpg')}
-        alt="Pulpo a la brasa en la cocina de Sal Marina"
-        class="aspect-[4/3] w-full object-cover"
-        loading="lazy"
-      />
+    <!-- Vídeo en bucle (móvil): parrilla a la brasa -->
+    <figure class="reveal mt-12 overflow-hidden md:hidden">
       <video
-        class="pointer-events-none absolute inset-x-0 top-0 h-[68%] w-full object-cover mix-blend-screen"
+        class="aspect-[4/3] w-full object-cover"
         autoplay
         muted
         loop
         playsinline
-        aria-hidden="true"
+        preload="metadata"
+        poster={asset('/assets/img/puerto-brasa-fuego.jpg')}
+        aria-label="Parrilla a la brasa en Sal Marina"
       >
-        <source src={asset('/assets/img/fuego-loop.mp4')} type="video/mp4" />
+        <source src={asset('/assets/img/brasa-loop.mp4')} type="video/mp4" />
       </video>
     </figure>
 
