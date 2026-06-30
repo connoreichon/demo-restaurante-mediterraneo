@@ -27,8 +27,11 @@ jobs:
 
       # Acción oficial de Astro: instala dependencias, hace build y
       # sube el contenido de dist/ como artefacto de Pages (añade .nojekyll).
+      # Astro 7 requiere Node >= 22.12, por eso fijamos node-version.
       - name: Instalar, construir y subir
         uses: withastro/action@v3
+        with:
+          node-version: 22
 
   deploy:
     needs: build
