@@ -48,6 +48,11 @@ body {
   background-attachment: fixed;
 }
 
+/* Deja aire bajo el header fijo al saltar a una sección por ancla (#lonja, etc.) */
+:where(section[id], [id].anchor) {
+  scroll-margin-top: 6.5rem;
+}
+
 /* Contenedor editorial (algo más ancho, para composición a sangre controlada) */
 .container-x {
   width: 100%;

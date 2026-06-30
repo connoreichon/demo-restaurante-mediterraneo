@@ -2,7 +2,6 @@
 import { site } from '../data/site';
 import { asset } from '../lib/asset';
 
-const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
 // Art-dirección: resaltamos "brasa" en el titular sin dejar de leerlo de los datos.
 const palabras = site.titularHero.split(' ');
 ---
@@ -15,11 +14,6 @@ const palabras = site.titularHero.split(' ');
     fetchpriority="high"
   />
   <div class="absolute inset-0 bg-gradient-to-t from-tinta via-tinta/30 to-tinta/55"></div>
-
-  <!-- Etiqueta vertical (margen derecho) -->
-  <div class="pointer-events-none absolute right-5 top-1/2 hidden -translate-y-1/2 lg:block">
-    <p class="kicker rotate-90 whitespace-nowrap text-papel/45">Est. {site.fundadoEn} — Sal Marina</p>
-  </div>
 
   <!-- Columna: masthead arriba, titular abajo (sin solaparse nunca) -->
   <div class="container-x relative z-10 flex flex-1 flex-col">
@@ -66,10 +60,6 @@ const palabras = site.titularHero.split(' ');
         <span>Desde {site.fundadoEn}</span>
         <span class="text-papel/30">·</span>
         <span>Cocina de mercado</span>
-        <span class="text-papel/30">·</span>
-        <a href={waLink} target="_blank" rel="noopener" class="text-brasa-400 underline-offset-4 hover:underline">
-          Reserva por WhatsApp
-        </a>
       </div>
     </div>
   </div>

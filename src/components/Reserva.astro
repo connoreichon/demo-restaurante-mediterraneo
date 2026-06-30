@@ -1,11 +1,12 @@
 ---
 import { site } from '../data/site';
 import { asset } from '../lib/asset';
+import WhatsAppIcon from './WhatsAppIcon.astro';
 const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
 const tel = `tel:${site.telefono.replace(/\s/g, '')}`;
 ---
 
-<section id="reserva" class="scroll-mt-24 bg-noche text-papel">
+<section id="reserva" class="bg-noche text-papel">
   <div class="container-x py-20 md:py-28">
     <header class="reveal flex items-end gap-5">
       <span class="sec-num text-7xl text-brasa-400/40 md:text-8xl">IV</span>
@@ -22,29 +23,27 @@ const tel = `tel:${site.telefono.replace(/\s/g, '')}`;
           Llámanos o escríbenos por WhatsApp. Te respondemos al momento, sin formularios.
         </p>
 
-        <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <div class="mt-9 flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-7">
           <a
             href={waLink}
             target="_blank"
             rel="noopener"
-            class="inline-flex items-center justify-center gap-3 bg-[#25D366] px-7 py-4 font-medium text-[#0b3d24] transition-transform hover:-translate-y-0.5"
+            class="inline-flex shrink-0 items-center justify-center gap-2.5 whitespace-nowrap rounded-full bg-[#25D366] px-6 py-3.5 font-semibold text-white shadow-[0_14px_34px_-14px_rgba(37,211,102,0.85)] ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1faf53]"
           >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm5.83 14.06c-.25.7-1.45 1.34-2 1.42-.53.08-1.2.11-1.94-.12-.45-.14-1.02-.33-1.77-.65-3.12-1.35-5.16-4.5-5.31-4.71-.16-.21-1.29-1.71-1.29-3.26s.81-2.31 1.1-2.62c.29-.31.63-.39.84-.39h.6c.19.01.45-.07.71.54.25.61.86 2.1.94 2.25.08.16.13.34.03.55-.1.21-.16.34-.31.52-.16.18-.33.4-.47.54-.16.16-.32.33-.14.64.18.31.81 1.34 1.75 2.17 1.2 1.07 2.22 1.4 2.53 1.56.31.16.5.13.68-.08.18-.21.78-.92 1-1.23.21-.31.42-.26.71-.16.29.11 1.85.87 2.16 1.03.31.16.52.24.6.37.08.13.08.76-.18 1.46Z" />
-            </svg>
+            <WhatsAppIcon class="h-5 w-5" />
             Reservar por WhatsApp
           </a>
-          <a href={tel} class="group inline-flex items-center gap-3 font-display text-3xl italic">
+          <a href={tel} class="group inline-flex items-center gap-3 font-display text-2xl italic md:text-3xl">
             {site.telefono}
             <span class="h-px w-7 bg-brasa-400 transition-all group-hover:w-11"></span>
           </a>
         </div>
 
-        <p class="mt-6 text-papel/55">¿Grupo grande o evento? Escríbenos a <a href={`mailto:${site.email}`} class="text-papel underline-offset-4 hover:underline">{site.email}</a> y te preparamos un menú.</p>
+        <p class="mt-7 max-w-md text-papel/55">¿Grupo grande o evento? Escríbenos a <a href={`mailto:${site.email}`} class="text-papel underline-offset-4 hover:underline">{site.email}</a> y te preparamos un menú.</p>
       </div>
 
-      <!-- Horario + ubicación -->
-      <div class="reveal mt-12 md:col-span-5 md:mt-0">
+      <!-- Horario + ubicación + mapa, integrados -->
+      <div class="reveal mt-14 md:col-span-5 md:mt-0">
         <p class="kicker text-oro">Horario</p>
         <ul class="mt-5 space-y-3">
           {
@@ -64,54 +63,53 @@ const tel = `tel:${site.telefono.replace(/\s/g, '')}`;
         <div class="my-7 hairline"></div>
 
         <p class="kicker text-oro">Dónde estamos</p>
-        <p class="mt-4 font-display text-2xl">{site.direccion}</p>
+        <p class="mt-4 font-display text-2xl leading-tight">{site.direccion}</p>
         <p class="text-papel/70">{site.ciudad}</p>
-        <a
-          href={site.mapsLink}
-          target="_blank"
-          rel="noopener"
-          class="group mt-3 inline-flex items-center gap-2 text-brasa-400 underline-offset-4 hover:underline"
-        >
-          Cómo llegar
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </a>
+
+        <!-- Mapa compacto, editorial (no rectángulo grande vacío) -->
+        {
+          site.mapsEmbed ? (
+            <iframe
+              src={site.mapsEmbed}
+              title="Mapa de ubicación de Sal Marina"
+              class="mt-5 block aspect-[5/3] w-full border border-papel/15 grayscale"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            />
+          ) : (
+            <a
+              href={site.mapsLink}
+              target="_blank"
+              rel="noopener"
+              class="group mt-5 block overflow-hidden border border-papel/15"
+              aria-label="Abrir ubicación en Google Maps"
+            >
+              <span class="relative block aspect-[5/3]">
+                <img
+                  src={asset('/assets/galeria-02.svg')}
+                  alt=""
+                  class="h-full w-full object-cover opacity-30 transition-opacity duration-500 group-hover:opacity-40"
+                  loading="lazy"
+                />
+                <span
+                  class="pointer-events-none absolute inset-0 opacity-25"
+                  style="background-image:linear-gradient(rgba(243,233,216,.14) 1px,transparent 1px),linear-gradient(90deg,rgba(243,233,216,.14) 1px,transparent 1px);background-size:30px 30px;"
+                />
+                <span class="absolute left-4 top-4">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d96a3f" stroke-width="1.8">
+                    <path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z" />
+                    <circle cx="12" cy="10" r="2.5" fill="#d96a3f" stroke="none" />
+                  </svg>
+                </span>
+                <span class="absolute bottom-3 left-4 flex items-center gap-2 text-papel">
+                  <span class="kicker">Cómo llegar</span>
+                  <span class="h-px w-6 bg-brasa-400 transition-all group-hover:w-9"></span>
+                </span>
+              </span>
+            </a>
+          )
+        }
       </div>
     </div>
   </div>
-
-  <!-- Mapa a sangre (placeholder enlazado, sin parecer panel) -->
-  {
-    site.mapsEmbed ? (
-      <iframe
-        src={site.mapsEmbed}
-        title="Mapa de ubicación de Sal Marina"
-        class="block h-64 w-full border-0 grayscale"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-      />
-    ) : (
-      <a
-        href={site.mapsLink}
-        target="_blank"
-        rel="noopener"
-        class="relative block h-56 overflow-hidden"
-        aria-label="Abrir ubicación en Google Maps"
-      >
-        <img src={asset('/assets/galeria-02.svg')} alt="" class="h-full w-full object-cover opacity-40" loading="lazy" />
-        <span
-          class="pointer-events-none absolute inset-0 opacity-30"
-          style="background-image:linear-gradient(rgba(243,233,216,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(243,233,216,.12) 1px,transparent 1px);background-size:36px 36px;"
-        />
-        <span class="absolute inset-0 flex items-center justify-center gap-3 text-papel">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d96a3f" stroke-width="1.8">
-            <path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z" />
-            <circle cx="12" cy="10" r="2.5" fill="#d96a3f" stroke="none" />
-          </svg>
-          <span class="kicker">Passeig del Port, 12 — abrir mapa</span>
-        </span>
-      </a>
-    )
-  }
 </section>
