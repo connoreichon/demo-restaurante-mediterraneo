@@ -8,92 +8,59 @@ const palabras = site.titularHero.split(' ');
 
 <section id="inicio" class="relative flex min-h-[100svh] w-full flex-col overflow-hidden bg-tinta text-papel">
   <!--
-    Fondo del hero. DEMO: imagen de atardecer + animación (zoom, brasas, resplandor).
-    CLIENTE REAL: sustituye el <img> por una foto del local o, si quieres vídeo,
-    descomenta el <video> y pon su .mp4/.webm en /public/assets (ver CAMBIAR_DATOS_CLIENTE.md).
+    Fondo del hero. DEMO: foto real (terraza frente al mar al atardecer) + zoom lento sutil.
+    CLIENTE REAL: cambia la imagen por una foto suya con el mismo nombre, o usa vídeo:
+    descomenta el <video>, pon su .mp4/.webm en /public/assets/img (ver CAMBIAR_DATOS_CLIENTE.md).
   -->
   <!--
-  <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline
-    poster={asset('/assets/hero-restaurante.svg')}>
-    <source src={asset('/assets/hero.webm')} type="video/webm" />
-    <source src={asset('/assets/hero.mp4')} type="video/mp4" />
+  <video class="kenburns absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline
+    poster={asset('/assets/img/hero-terraza-mar.jpg')}>
+    <source src={asset('/assets/img/hero.webm')} type="video/webm" />
+    <source src={asset('/assets/img/hero.mp4')} type="video/mp4" />
   </video>
   -->
   <img
-    src={asset('/assets/hero-restaurante.svg')}
-    alt="Terraza frente al mar al atardecer en Sal Marina"
+    src={asset('/assets/img/hero-terraza-mar.jpg')}
+    alt="Terraza de Sal Marina frente al mar al atardecer"
     class="kenburns absolute inset-0 h-full w-full object-cover"
     fetchpriority="high"
   />
 
-  <!-- Brasas que suben (movimiento, sin vídeo) -->
-  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-    <span class="ember" style="left:14%;--dx:18px;--dur:7.5s;--dly:0s"></span>
-    <span class="ember" style="left:24%;--dx:-14px;--dur:9s;--dly:1.6s"></span>
-    <span class="ember" style="left:38%;--dx:22px;--dur:8s;--dly:3.1s"></span>
-    <span class="ember" style="left:52%;--dx:-10px;--dur:10s;--dly:0.8s"></span>
-    <span class="ember" style="left:63%;--dx:16px;--dur:7s;--dly:2.4s"></span>
-    <span class="ember" style="left:74%;--dx:-20px;--dur:9.5s;--dly:4s"></span>
-    <span class="ember" style="left:85%;--dx:12px;--dur:8.5s;--dly:1.2s"></span>
-    <span class="ember" style="left:46%;--dx:-16px;--dur:11s;--dly:5.2s"></span>
-  </div>
+  <!-- Capas de oscurecido: arriba (para el logo del header) y abajo-izquierda (para el texto) -->
+  <div class="absolute inset-0 bg-gradient-to-t from-tinta via-tinta/35 to-tinta/70"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-tinta/80 via-tinta/25 to-transparent"></div>
 
-  <!-- Resplandor de brasa que palpita en la base -->
-  <div
-    class="hero-glow pointer-events-none absolute inset-x-0 bottom-0 h-1/3"
-    style="background:radial-gradient(120% 100% at 50% 100%, rgba(216,82,27,0.45), rgba(189,68,34,0.12) 45%, transparent 70%)"
-    aria-hidden="true"
-  >
-  </div>
-
-  <div class="absolute inset-0 bg-gradient-to-t from-tinta via-tinta/25 to-tinta/55"></div>
-
-  <!-- Columna: masthead arriba, titular abajo (sin solaparse nunca) -->
-  <div class="container-x relative z-10 flex flex-1 flex-col">
-    <!-- Masthead editorial -->
-    <div class="reveal flex items-center gap-4 pt-28 md:pt-32">
-      <span class="hidden h-px flex-1 bg-papel/30 sm:block"></span>
-      <p class="kicker text-center text-papel/75">
-        Cocina de mercado · Frente al puerto · Palma de Mallorca
-      </p>
-      <span class="hidden h-px flex-1 bg-papel/30 sm:block"></span>
-    </div>
-
-    <div class="flex-1"></div>
-
-    <!-- Titular anclado abajo -->
-    <div class="max-w-5xl pb-10 md:pb-14">
-      <h1 class="reveal display text-[clamp(2.7rem,10vw,7.5rem)] leading-[0.92]">
-        {
-          palabras.map((p) =>
-            p.toLowerCase().replace(/[,.]/g, '') === 'brasa' ? (
-              <span class="italic text-brasa-400">{p} </span>
-            ) : (
-              <span>{p} </span>
-            )
+  <!-- Contenido: anclado al tercio inferior (mt-auto) y con margen de seguridad
+       bajo el header (pt-24) para no pisarse nunca con el logo -->
+  <div class="container-x relative z-10 mt-auto pb-12 pt-24 md:pb-16">
+    <h1 class="reveal display max-w-[15ch] text-[clamp(2.4rem,6vw,5rem)] leading-[0.95]">
+      {
+        palabras.map((p) =>
+          p.toLowerCase().replace(/[,.]/g, '') === 'brasa' ? (
+            <span class="italic text-brasa-400">{p} </span>
+          ) : (
+            <span>{p} </span>
           )
-        }
-      </h1>
+        )
+      }
+    </h1>
 
-      <div class="reveal mt-8 max-w-md">
-        <p class="text-papel/80">{site.subtituloHero}</p>
+    <p class="reveal mt-6 max-w-md text-papel/85">{site.subtituloHero}</p>
 
-        <!-- Reserva como línea de carta (no botón genérico) -->
-        <a href="#reserva" class="leader group mt-6 text-papel">
-          <span class="font-display text-2xl italic">Reservar mesa</span>
-          <span class="leader__fill"></span>
-          <span class="kicker text-brasa-400">hoy</span>
-        </a>
-      </div>
+    <!-- Reserva como línea de carta (no botón genérico) -->
+    <a href="#reserva" class="reveal leader group mt-6 max-w-xs text-papel">
+      <span class="font-display text-2xl italic">Reservar mesa</span>
+      <span class="leader__fill"></span>
+      <span class="kicker text-brasa-400">hoy</span>
+    </a>
 
-      <!-- Línea de datos clave (integrada, no badges, sin reseñas) -->
-      <div class="reveal mt-9 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-papel/20 pt-5 text-sm text-papel/70">
-        <span>Palma de Mallorca</span>
-        <span class="text-papel/30">·</span>
-        <span>Desde {site.fundadoEn}</span>
-        <span class="text-papel/30">·</span>
-        <span>Cocina de mercado</span>
-      </div>
+    <!-- Línea de datos clave (integrada, no badges, sin reseñas) -->
+    <div class="reveal mt-8 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-papel/20 pt-5 text-sm text-papel/75">
+      <span>Palma de Mallorca</span>
+      <span class="text-papel/30">·</span>
+      <span>Desde {site.fundadoEn}</span>
+      <span class="text-papel/30">·</span>
+      <span>Cocina de mercado</span>
     </div>
   </div>
 </section>

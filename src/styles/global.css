@@ -133,71 +133,23 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* --- Hero con movimiento (sin vídeo): zoom cine + brasas + resplandor ----- */
+/* --- Hero: zoom lento y sutil sobre la foto real (tipo cine) -------------- */
 @keyframes kenburns {
   from {
-    transform: scale(1.06) translate3d(0, 0, 0);
+    transform: scale(1.04) translate3d(0, 0, 0);
   }
   to {
-    transform: scale(1.16) translate3d(-1.5%, -2%, 0);
+    transform: scale(1.11) translate3d(-1%, -1.5%, 0);
   }
 }
 .kenburns {
-  animation: kenburns 26s ease-in-out infinite alternate;
+  animation: kenburns 28s ease-in-out infinite alternate;
   will-change: transform;
 }
 
-@keyframes ember-rise {
-  0% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0;
-  }
-  12% {
-    opacity: 0.9;
-  }
-  75% {
-    opacity: 0.65;
-  }
-  100% {
-    transform: translateY(-60vh) translateX(var(--dx, 12px)) scale(0.4);
-    opacity: 0;
-  }
-}
-.ember {
-  position: absolute;
-  bottom: 6%;
-  width: 5px;
-  height: 5px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, #ffcf8a 0%, #e0683a 55%, rgba(189, 68, 34, 0) 75%);
-  animation: ember-rise var(--dur, 7s) linear infinite;
-  animation-delay: var(--dly, 0s);
-}
-
-@keyframes glow-flicker {
-  0%,
-  100% {
-    opacity: 0.45;
-    transform: scaleY(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scaleY(1.08);
-  }
-}
-.hero-glow {
-  animation: glow-flicker 5.5s ease-in-out infinite;
-  transform-origin: bottom;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .kenburns,
-  .ember,
-  .hero-glow {
+  .kenburns {
     animation: none;
-  }
-  .ember {
-    display: none;
   }
 }
 

@@ -48,28 +48,33 @@ Para cambiar las tipografías: edita `--font-display`, `--font-body` y `--font-h
 
 > Consulta `DESIGN_SYSTEM.md` para paletas recomendadas por tipo de negocio.
 
-## 3. Imágenes → `public/assets/`
-Sustituye los SVG de placeholder por **fotos reales**, idealmente con el **mismo
-nombre de archivo** (así no tocas el código). Si cambias la extensión (a `.jpg`/`.webp`),
-actualiza las rutas en `src/data/site.ts` y, para el hero, en `src/components/Portada.astro`.
+## 3. Imágenes → `public/assets/img/`
+Las **fotos** de la demo están en `public/assets/img/` (las `*.svg` sueltas de
+`public/assets/` son el logo y placeholders antiguos, ya no se usan en la home).
 
-**Hero (portada):** la demo usa una escena de atardecer animada (zoom + brasas + resplandor,
-todo por CSS, sin derechos). Para el cliente:
-- **Foto:** reemplaza `hero-restaurante.svg` por una foto horizontal potente (terraza, mar,
-  plato a la brasa). Las animaciones de brasas/zoom siguen funcionando encima.
+> **Origen y licencia:** las fotos de la demo son de **Pexels** (licencia gratuita,
+> uso comercial y personal, sin atribución obligatoria) — válidas para demo/portfolio.
+> Para la **web final del cliente**, sustitúyelas por **fotos propias del cliente**:
+> venden más y evitan cualquier duda de derechos.
+
+Sustituye cada archivo por la foto real con el **mismo nombre** (así no tocas el código).
+Si cambias la extensión, actualiza las rutas en `src/data/site.ts`.
+
+**Hero (portada):** la demo usa `img/hero-terraza-mar.jpg` con un zoom lento sutil.
+- **Foto:** reemplázala por una foto horizontal potente (terraza con mar/puerto, o plato
+  a la brasa). El zoom y el degradado siguen funcionando encima.
 - **Vídeo:** en `src/components/Portada.astro` hay un bloque `<video>` comentado. Descoméntalo,
-  pon el `hero.mp4`/`hero.webm` del cliente en `public/assets/` y deja la imagen como `poster`.
+  pon `img/hero.mp4`/`img/hero.webm` del cliente y deja la imagen de `poster`.
 
-Archivos a sustituir:
-- `hero-restaurante.svg` → foto horizontal potente del local/plato estrella (o vídeo, ver arriba).
-- `sobre-nosotros.svg` → foto vertical (cocina, equipo, dueño).
-- `plato-*.svg` → fotos cuadradas de cada especialidad.
-- `galeria-01..06.svg` → fotos del ambiente, terraza, producto, equipo.
-- `og-image.svg` → imagen para compartir en redes (1200×630).
-- `logo.svg` → logo real del cliente.
+Archivos a sustituir (en `public/assets/img/`):
+- `hero-terraza-mar.jpg` → portada (terraza/mar/puerto, o vídeo).
+- `lonja-pescado-brasa.jpg` → foto del producto del día (sección "Hoy entra por lonja").
+- `puerto-brasa-fuego.jpg` → brasa/fuego (sección "Del puerto a la brasa").
+- `galeria-1..6-*.jpg` → ambiente, terraza, brasa, marisco, mesa, puerto.
+- `logo.svg` (en `public/assets/`) → logo real del cliente.
 
-> Optimiza las fotos antes de subirlas (formato `webp`/`jpg`, ancho razonable).
-> **Confirma siempre los derechos de uso** de cada foto.
+> Optimiza las fotos antes de subirlas (`webp`/`jpg`, ancho ~1200–1920).
+> **Confirma siempre los derechos** de cualquier foto que no sea del cliente.
 
 ## 4. Mapa de Google Maps
 1. Busca el negocio en Google Maps → **Compartir** → "Insertar un mapa" → copia el `src` del `<iframe>`.

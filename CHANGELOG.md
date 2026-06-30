@@ -2,6 +2,16 @@
 
 Registro de cambios. Lo más reciente arriba.
 
+## [2.2.0] — 2026-06-30 — Fotos reales + hero
+### Cambiado
+- Hero rehecho: foto real (terraza premium frente al mar), composición con texto
+  anclado abajo, degradados arriba/izquierda. Solape logo/H1 eliminado de raíz
+  (H1 con `clamp` contenido, `max-w`, `mt-auto`, separación verificada >300px).
+- Sustituidas las imágenes (SVG generados) por **fotos reales de Pexels** (licencia
+  libre) en hero, "Hoy entra por lonja", "Del puerto a la brasa", galería y mapa.
+- Fotos locales en `public/assets/img/` (sin hotlinking). Créditos en `CREDITS-IMAGENES.md`.
+- Quitados los efectos artificiales del hero (chispas/resplandor); queda solo zoom lento.
+
 ## [2.0.0] — 2026-06-30 — Rediseño editorial
 ### Cambiado
 - Rediseño completo de dirección visual: "carta editorial mediterránea × lonja y brasa".

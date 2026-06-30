@@ -64,7 +64,7 @@ export const lonja = {
       origen: 'Lonja de Palma',
       preparacion: 'A la sal o a la brasa de leña',
       precio: 's/m',
-      imagen: '/assets/plato-pescado-brasa.svg'
+      imagen: '/assets/img/lonja-pescado-brasa.jpg'
     },
     {
       nombre: 'Gamba roja de Sóller',
@@ -126,12 +126,12 @@ export const especialidades = carta.platos;
 // --- Galería editorial (tamaños variados para composición asimétrica) -------
 // `tam`: 'feature' (grande), 'tall' (vertical), 'wide' (apaisada), 'normal'.
 export const galeria = [
-  { src: '/assets/galeria-02.svg', alt: 'La terraza al atardecer', tam: 'feature', cap: 'La terraza, al caer el sol' },
-  { src: '/assets/galeria-06.svg', alt: 'La brasa en la cocina', tam: 'tall', cap: 'El fuego, siempre encendido' },
-  { src: '/assets/galeria-03.svg', alt: 'Producto de temporada', tam: 'normal', cap: 'Lo de hoy' },
-  { src: '/assets/galeria-04.svg', alt: 'Mesa puesta', tam: 'normal', cap: 'Mesa sin prisa' },
-  { src: '/assets/galeria-01.svg', alt: 'Ambiente de la sala', tam: 'tall', cap: 'La sala' },
-  { src: '/assets/galeria-05.svg', alt: 'Barra y selección de vinos', tam: 'wide', cap: 'La barra y los vinos de la isla' }
+  { src: '/assets/img/galeria-1-terraza-puerto.jpg', alt: 'Terraza del restaurante frente al puerto', tam: 'feature', cap: 'La terraza, frente al puerto' },
+  { src: '/assets/img/galeria-2-fuego.jpg', alt: 'Pescado a la brasa', tam: 'tall', cap: 'El fuego, siempre encendido' },
+  { src: '/assets/img/galeria-3-marisco.jpg', alt: 'Marisco a la brasa', tam: 'normal', cap: 'Lo de hoy, de la lonja' },
+  { src: '/assets/img/galeria-4-mesa-mar.jpg', alt: 'Mesa puesta frente al mar', tam: 'normal', cap: 'Mesa sin prisa, frente al mar' },
+  { src: '/assets/img/galeria-5-sombra.jpg', alt: 'Terraza con sombrillas', tam: 'tall', cap: 'Sombra y sobremesa' },
+  { src: '/assets/img/galeria-6-pescadores.jpg', alt: 'Pescadores en el puerto al amanecer', tam: 'wide', cap: 'Del puerto, cada mañana' }
 ];
 
 // --- Opiniones (ficticias realistas para la demo) ---------------------------
