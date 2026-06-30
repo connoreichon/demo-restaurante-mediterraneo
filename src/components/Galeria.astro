@@ -1,5 +1,6 @@
 ---
 import { galeria } from '../data/site';
+import { asset } from '../lib/asset';
 ---
 
 <section id="galeria" class="bg-crema-200 py-20 md:py-28">
@@ -19,7 +20,7 @@ import { galeria } from '../data/site';
             ]}
           >
             <img
-              src={g.src}
+              src={asset(g.src)}
               alt={g.alt}
               loading="lazy"
               class="h-full w-full object-cover transition-transform duration-700 hover:scale-105"

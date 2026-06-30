@@ -1,0 +1,42 @@
+name: Desplegar en GitHub Pages
+
+on:
+  # Despliega en cada push a main
+  push:
+    branches: [main]
+  # Permite lanzarlo manualmente desde la pestaña Actions
+  workflow_dispatch:
+
+# Permisos mínimos que necesita el despliegue de Pages (sin tokens externos)
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Evita despliegues solapados; no cancela uno en curso
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Acción oficial de Astro: instala dependencias, hace build y
+      # sube el contenido de dist/ como artefacto de Pages (añade .nojekyll).
+      - name: Instalar, construir y subir
+        uses: withastro/action@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar en GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

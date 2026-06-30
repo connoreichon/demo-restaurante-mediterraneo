@@ -1,12 +1,13 @@
 ---
 import { site } from '../data/site';
+import { asset } from '../lib/asset';
 const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
 ---
 
 <section id="inicio" class="relative min-h-[100svh] w-full overflow-hidden">
   <!-- Imagen de fondo (placeholder: /assets/hero-restaurante.svg) -->
   <img
-    src="/assets/hero-restaurante.svg"
+    src={asset('/assets/hero-restaurante.svg')}
     alt="Interior del restaurante Sal Marina"
     class="absolute inset-0 h-full w-full object-cover"
     fetchpriority="high"

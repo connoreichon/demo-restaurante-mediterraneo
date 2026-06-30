@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import { asset } from '../lib/asset';
 const anios = site.anioActual - site.fundadoEn;
 ---
 
@@ -40,7 +41,7 @@ const anios = site.anioActual - site.fundadoEn;
 
     <div class="reveal order-1 md:order-2">
       <img
-        src="/assets/sobre-nosotros.svg"
+        src={asset('/assets/sobre-nosotros.svg')}
         alt="La cocina de Sal Marina"
         loading="lazy"
         class="aspect-[5/6] w-full rounded-2xl object-cover shadow-soft"

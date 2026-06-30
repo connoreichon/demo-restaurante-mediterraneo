@@ -1,11 +1,12 @@
 ---
 import { site } from '../data/site';
+import { asset } from '../lib/asset';
 const waLink = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMensaje)}`;
 ---
 
 <section id="contacto" class="relative overflow-hidden bg-carbon py-20 text-crema md:py-28">
   <img
-    src="/assets/galeria-02.svg"
+    src={asset('/assets/galeria-02.svg')}
     alt=""
     aria-hidden="true"
     class="absolute inset-0 h-full w-full object-cover opacity-20"

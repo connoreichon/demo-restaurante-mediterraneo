@@ -1,5 +1,7 @@
 # Sal Marina — Demo restaurante mediterráneo
 
+**🔗 Demo online:** https://connoreichon.github.io/demo-restaurante-mediterraneo/
+
 Web de **demostración** (portfolio) para vender en Fiverr / Workana / contacto directo.
 Restaurante ficticio mediterráneo moderno. Pensada para **adaptarse en minutos** a
 restaurantes, cafeterías, tiendas u otros negocios locales.
@@ -25,13 +27,38 @@ restaurantes, cafeterías, tiendas u otros negocios locales.
 - **Footer** + **WhatsApp flotante**.
 - Responsive móvil / tablet / desktop. SEO básico + datos estructurados (Schema.org).
 
-## Cómo arrancar
+## Cómo arrancar (local)
 ```bash
 npm install
-npm run dev        # http://localhost:4321
-npm run build      # genera /dist (estático)
-npm run preview    # sirve /dist en local
+npm run dev        # http://localhost:4321/demo-restaurante-mediterraneo/
 npm run gen:assets # regenera los placeholders SVG de /public/assets
+```
+> ℹ️ La web vive bajo el `base` `/demo-restaurante-mediterraneo/` (para GitHub Pages),
+> por eso la URL local incluye esa ruta. La raíz `/` da 404 a propósito.
+
+## Cómo hacer build
+```bash
+npm run build      # genera /dist (estático)
+npm run preview    # sirve /dist en local (misma ruta /demo-restaurante-mediterraneo/)
+```
+
+## Desplegar en GitHub Pages
+El despliegue es **automático**: cada `git push` a `main` lanza el workflow
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), que compila con la
+acción oficial de Astro y publica `dist/` en Pages. Sin Netlify, Vercel ni tokens externos.
+
+Configuración (ya hecha en este repo):
+- `astro.config.mjs`: `site: 'https://connoreichon.github.io'` y `base: '/demo-restaurante-mediterraneo'`.
+- Las rutas de imágenes usan el helper [`src/lib/asset.ts`](src/lib/asset.ts) para respetar el `base`.
+- GitHub → **Settings → Pages → Source: GitHub Actions**.
+- El repo debe ser **público** (Pages gratis no admite repos privados).
+
+Para un repo nuevo, cambia el nombre del repo en `base` (debe coincidir) y el usuario en `site`.
+
+## Comandos útiles
+```bash
+npm run preview    # vista previa del build
+npm run gen:assets # regenera placeholders SVG
 ```
 
 ## Estructura
@@ -40,6 +67,7 @@ src/
 ├── data/site.ts            ← TODOS los datos del cliente (editar aquí)
 ├── styles/global.css       ← tokens de marca (colores, fuentes)
 ├── layouts/Base.astro      ← <head>, SEO, fuentes, script de animación
+├── lib/asset.ts            ← helper de rutas (respeta el `base` de Pages)
 ├── components/             ← Header, Hero, Especialidades, Nosotros,
 │                             Galeria, Opiniones, HorarioUbicacion,
 │                             Contacto, Footer, WhatsAppFloat

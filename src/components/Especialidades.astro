@@ -1,5 +1,6 @@
 ---
 import { especialidades } from '../data/site';
+import { asset } from '../lib/asset';
 ---
 
 <section id="especialidades" class="bg-crema py-20 md:py-28">
@@ -18,7 +19,7 @@ import { especialidades } from '../data/site';
           <article class="reveal group overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-carbon/5">
             <div class="aspect-square overflow-hidden">
               <img
-                src={e.imagen}
+                src={asset(e.imagen)}
                 alt={e.nombre}
                 loading="lazy"
                 class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import { asset } from '../lib/asset';
 
 interface Props {
   title?: string;
@@ -11,6 +12,9 @@ const {
   title = `${site.nombre} · ${site.reclamo} en ${site.ciudad.split(' ').slice(1).join(' ')}`,
   description = site.subtituloHero
 } = Astro.props;
+
+// URL absoluta para compartir en redes (requiere `site` en astro.config)
+const ogImage = new URL(asset('/assets/og-image.svg'), Astro.site).toString();
 ---
 
 <!doctype html>
@@ -18,7 +22,7 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/assets/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href={asset('/assets/logo.svg')} />
 
     <!-- Tipografías (licencia abierta, sin derechos) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,7 +40,7 @@ const {
     <meta property="og:type" content="restaurant" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/assets/og-image.svg" />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:locale" content="es_ES" />
     <meta name="twitter:card" content="summary_large_image" />
 
